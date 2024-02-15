@@ -17,14 +17,19 @@ helps me bring back childhood memories and allows me to unleash my creativity, a
 development.
 
 ## User Stories
-- As a user, I want to be able to create a character and add it to a list of characters.
-- As a user, I want to have options for selecting the sex of my character during the creation process.
-- As a user, I want a variety of classes (Knight, Barbarian, Ranger, etc.) to choose from during character creation, each 
-with unique attributes and abilities.
-- As a user, I want to engage in training sessions within the school to improve my character's skills and earn experience 
-points.
-- As a user, I want my character to gain special abilities through training, such as accelerated healing, resistance, 
-and swiftness.
-- As a user, I want to track the progress of my character, including experience points, level, and any unlocked abilities.
-- As a user, I want the application to provide feedback when my character achieves a new level or unlocks a special ability.
-- As a user, I want the option to save and load my character's progress, allowing me to continue playing at a later time.
+- As a player, I want to be able to create a character and add it to my list of characters created before, specifying
+their name, gender, and classes (e.g. Barbarians, Knights, Rangers).
+
+- As a player, I want to be able to view the list of all of my character created.
+
+- As a player, I want to be able to view my character's health, attack power and defense power.
+
+- As a player, I want to be able to participate in training sessions to improve my character's skills and earn experience points, enabling character progression and development.
+
+- As a player, I want to be able to train my character to acquire special abilities, such as enhanced healing or increased resilience.
+
+- As a player, I want to be able to monitor my character's progression, including tracking experience points, levels, and unlocked abilities.
+
+- As a player, I want to be able to receive feedback when my character levels up or unlocks new abilities.
+
+- As a player, I want to be able to save and load my character's progress, ensuring I can continue my gaming sessions seamlessly.

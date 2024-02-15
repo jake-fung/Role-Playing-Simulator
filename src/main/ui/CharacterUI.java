@@ -3,47 +3,40 @@ package ui;
 import model.*;
 import model.Character;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class RPGcharacter {
-    private final ArrayList<Character> characterLog;
+// The RPGCharacter class represents a character in a role-playing game (RPG).
+// This class provides attributes and methods to manage the characteristics and actions of an RPG character.
+// It serves as a main ui for starting the application, creating a character and selecting a character.
+
+public class CharacterUI {
+    private final CharacterLog characterLog;
     private final Scanner scanner;
     private String name;
     private boolean isMale;
     private int rpClass;
 
-    public RPGcharacter() {
-        characterLog = new ArrayList<>();
+    // MODIFIES: this
+    // EFFECTS: Constructs a new `CharacterUI` object and initializes the `characterLog` and `scanner` fields.
+    public CharacterUI() {
         scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
-        runTitle();
+        characterLog = new CharacterLog();
+        runCharacterMenu();
     }
-
-    public void runTitle() {
-        System.out.println("Welcome to RPG Character Builder!\n");
-        System.out.println("It features an interactive application in which you can create your own unique characters"
-                + "\nand train them in school to earn special abilities!");
-        runMainMenu();
-    }
-
-    /********************************************
-     * This is where we run the main menu of the application *
-     ********************************************/
 
     // EFFECTS: Initiates the main menu loop where users can choose different actions.
-    public void runMainMenu() {
+    public void runCharacterMenu() {
         String response;
         while (true) {
-            displayMenu();
+            displayCharacterMenu();
             response = scanner.next();
-            selectMenu(response);
+            selectCharacterMenu(response);
         }
     }
 
     // EFFECTS: Displays the main menu options to the user.
-    public void displayMenu() {
+    public void displayCharacterMenu() {
         System.out.println("\nActions: ");
         System.out.println("\t1 -> New Character");
         System.out.println("\t2 -> Saved Characters");
@@ -53,11 +46,11 @@ public class RPGcharacter {
 
     // REQUIRES: response must be a valid integer input.
     // EFFECTS: Selects and executes the corresponding action based on the user's menu choice.
-    public void selectMenu(String response) {
+    public void selectCharacterMenu(String response) {
         if (response.equals("1")) {
             characterBuilder();
         } else if (response.equals("2")) {
-            if (characterLog.size() != 0) {
+            if (characterLog.getNumCharacters() != 0) {
                 savedCharacter();
             } else {
                 System.out.println("There is no existing character available!");
@@ -84,6 +77,9 @@ public class RPGcharacter {
         } while (confirmCreate());
         createCharacter();
         System.out.println("Character created successfully!");
+        System.out.println("Press enter to continue.");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
 
@@ -178,49 +174,49 @@ public class RPGcharacter {
     // MODIFIES: this
     // EFFECTS: Creates a new character based on the user's choices and adds it to the character log.
     private void createCharacter() {
-        Character character;
+        Character character = new Character(0,0,0);
         if (rpClass == 0) {
-            character = new Barbarian(name, isMale);
+            character = new Barbarian();
         } else if (rpClass == 1) {
-            character = new Knight(name, isMale);
+            character = new Knight();
         } else {
-            character = new Ranger(name, isMale);
+            character = new Ranger();
         }
-        characterLog.add(character);
+        character.setName(name);
+        character.setIsMale(isMale);
+        characterLog.addCharacter(character);
     }
 
     /********************************************
      * This is where we run the saved characters option after selecting 2 in the main menu *
      ********************************************/
 
+
+    // EFFECTS: Display the list of saved characters and initializes a new RPGschool object.
     public void savedCharacter() {
         displayCharacters();
         Character selectedCharacter = selectCharacter();
         System.out.println("You selected: " + selectedCharacter.getName());
-        new RPGschool(selectedCharacter);
+        new SchoolUI(selectedCharacter);
     }
 
+    // EFFECTS: display the list of characters available in the character log.
     public void displayCharacters() {
         System.out.println("Select a character:");
-        for (int i = 0; i < characterLog.size(); i++) {
-            System.out.println((i + 1) + ". " + characterLog.get(i).getName());
-        }
-
+        characterLog.displayCharactersName();
     }
 
+    // REQUIRES: choice should be a valid input of integer.
+    // EFFECTS: select a character based on user's input.
     public Character selectCharacter() {
-        System.out.print("Enter the number of the character you want to select: ");
+        System.out.print("Enter a number of the character you want to select: ");
         int choice = scanner.nextInt();
-        try {
-            if (choice >= 1 && choice <= characterLog.size()) {
-                return characterLog.get(choice - 1);
-            } else {
-                System.out.println("Invalid choice. Please select a valid character.");
-                return selectCharacter();
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a number!");
+        if (choice >= 1 && choice <= characterLog.getNumCharacters()) {
+            return characterLog.getCharacter(choice - 1);
+        } else {
+            System.out.println("Invalid choice. Please select a valid character.");
             return selectCharacter();
         }
     }
 }
+

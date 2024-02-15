@@ -1,0 +1,116 @@
+package ui;
+
+import model.Character;
+import model.Trainer;
+
+import java.util.Scanner;
+
+public class SchoolUI {
+    private final Scanner scanner;
+
+
+    public SchoolUI(Character c) {
+        scanner = new Scanner(System.in);
+        scanner.useDelimiter("\n");
+        while (true) {
+            displayCharacterStats(c);
+            displaySchoolMenu();
+            selectSchoolMenu(c);
+        }
+    }
+
+    public void displayCharacterStats(Character c) {
+        System.out.println("\n\tName: " + c.getName());
+        System.out.println("\tSex: " + (c.getIsMale() ? "Male" : "Female"));
+        System.out.println("\tExp: " + c.getExperience());
+        System.out.println("\tHealth: " + c.getHealth());
+        System.out.println("\tAttack Power: " + c.getAttackPower());
+        System.out.println("\tDefense Power: " + c.getDefensePower());
+    }
+
+    public void displaySchoolMenu() {
+        System.out.println("\nWelcome to the academy!");
+        System.out.println("\tHere you can train your character to obtain special abilities and enhance their skills! "
+                + "Train and earn experience points by completing challenges!");
+        System.out.println("\tLevel up your character to unlock new abilities, increase their strength, "
+                + "and become a more formidable force in the game! ");
+        System.out.println("\nActions: ");
+        System.out.println("\t1. Train");
+        System.out.println("\t2. Gain special ability");
+    }
+
+    public void selectSchoolMenu(Character c) {
+        System.out.println("Enter a number: ");
+        String response = scanner.next();
+        if (response.equals("1")) {
+            trainingCenter(c);
+        } else if (response.equals("2")) {
+            gainSpecialAbility(c);
+        } else {
+            System.out.println("Invalid input!");
+            selectSchoolMenu(c);
+        }
+    }
+
+    public void trainingCenter(Character c) {
+        Trainer trainer = new Trainer();
+        displayIntro();
+        runTrainer(trainer);
+        calculateResult(c, trainer);
+    }
+
+    public void displayIntro() {
+        System.out.println("\nWelcome to the training session!");
+        System.out.println("\tGet ready to sharpen your skills and earn experience points!");
+        System.out.println("\tType the words correctly in order to gain experience points.");
+        System.out.println("\tPress enter after typing each word to proceed to the next challenge.");
+        System.out.println("\tAre you ready? Let's begin!");
+
+        System.out.println("\nPress Enter to start the test.");
+        scanner.nextLine();
+        scanner.nextLine();
+    }
+
+    public void runTrainer(Trainer trainer) {
+        for (int i = 1; i <= 10; i++) {
+            String word = trainer.getRandomWord();
+            System.out.println("\n" + word + " ");
+            String typedWord = scanner.next();
+            if (word.equals(typedWord)) {
+                System.out.println("You earned one point!");
+                trainer.addWordCount();
+            } else {
+                System.out.println("Oops! You have typed wrong.");
+            }
+        }
+    }
+
+
+    public void calculateResult(Character c, Trainer trainer) {
+        System.out.println("\nTest completed!");
+        System.out.println(c.getName() + " has earned " + trainer.getWordCount() + " experience points from training!");
+        c.gainExperience(trainer.getWordCount());
+        System.out.println("\nPress enter to continue");
+        scanner.nextLine();
+        scanner.nextLine();
+    }
+
+
+    public void gainSpecialAbility(Character c) {
+        System.out.println("What ability do you want " + c.getName() + " gain?");
+        String ability = scanner.next();
+        switch (ability.toLowerCase()) {
+            case "accelerated healing":
+                System.out.println("\n" + c.getName() + " has gained the special ability: Accelerated Healing!");
+                break;
+            case "resistance":
+                System.out.println("\n" + c.getName() + " has gained the special ability: Resistance!");
+                break;
+            case "swiftness":
+                System.out.println("\n" + c.getName() + " has gained the special ability: Swiftness!");
+                break;
+            default:
+                System.out.println("\nInvalid special ability.");
+        }
+    }
+}

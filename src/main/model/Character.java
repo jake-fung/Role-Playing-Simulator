@@ -1,21 +1,25 @@
 package model;
 
-public abstract class Character {
+public class Character {
     protected String name;
     protected boolean isMale;
+    protected int experience;
     protected int health;
     protected int attackPower;
     protected int defensePower;
 
-    public Character(String name, boolean isMale, int health, int attackPower, int defensePower) {
-        this.name = name;
-        this.isMale = isMale;
+    public Character(int health, int attackPower, int defensePower) {
+        this.name = "";
+        this.isMale = false;
+        this.experience = 0;
         this.health = health;
         this.attackPower = attackPower;
         this.defensePower = defensePower;
     }
 
-    public abstract void specialAbility();
+    public void gainExperience(int amount) {
+        setExperience(getExperience() + amount);
+    }
 
     // Getters and Setters
     public String getName() {
@@ -24,6 +28,10 @@ public abstract class Character {
 
     public boolean getIsMale() {
         return isMale;
+    }
+
+    public int getExperience() {
+        return experience;
     }
 
     public int getHealth() {
@@ -44,6 +52,10 @@ public abstract class Character {
 
     public void setIsMale(boolean isMale) {
         this.isMale = isMale;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 
     public void setHealth(int health) {
