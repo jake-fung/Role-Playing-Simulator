@@ -1,4 +1,4 @@
-# RPG Character Builder - Term Project for UBC CPSC 210
+# Role-Playing Simulator - Term Project for UBC CPSC 210
 
 ## Proposal
 
@@ -17,10 +17,14 @@ helps me bring back childhood memories and allows me to unleash my creativity, a
 development.
 
 ## User Stories
+- As a player, I want to be able to create a new character or select an old character I created.
+
 - As a player, I want to be able to create a character and add it to my list of characters created before, specifying
 their name, gender, and classes (e.g. Barbarians, Knights, Rangers).
 
 - As a player, I want to be able to view the list of all of my character created.
+
+- As a player, I want to be able to remove a created character from my list of characters created.
 
 - As a player, I want to be able to view my character's health, attack power and defense power.
 
@@ -28,8 +32,6 @@ their name, gender, and classes (e.g. Barbarians, Knights, Rangers).
 
 - As a player, I want to be able to train my character to acquire special abilities, such as enhanced healing or increased resilience.
 
-- As a player, I want to be able to monitor my character's progression, including tracking experience points, levels, and unlocked abilities.
-
-- As a player, I want to be able to receive feedback when my character levels up or unlocks new abilities.
+- As a player, I want to be able to monitor my character's progression, including tracking experience points and unlocked abilities.
 
 - As a player, I want to be able to save and load my character's progress, ensuring I can continue my gaming sessions seamlessly.

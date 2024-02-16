@@ -5,10 +5,8 @@ import model.Character;
 
 import java.util.Scanner;
 
-// The RPGCharacter class represents a character in a role-playing game (RPG).
-// This class provides attributes and methods to manage the characteristics and actions of an RPG character.
-// It serves as a main ui for starting the application, creating a character and selecting a character.
-
+// The CharacterUI class represents a CUI interface for a character in a role-playing game (RPG).
+// It serves as a main ui for creating a character and selecting a character.
 public class CharacterUI {
     private final CharacterLog characterLog;
     private final Scanner scanner;
@@ -16,17 +14,16 @@ public class CharacterUI {
     private boolean isMale;
     private int rpClass;
 
-    // MODIFIES: this
     // EFFECTS: Constructs a new `CharacterUI` object and initializes the `characterLog` and `scanner` fields.
     public CharacterUI() {
         scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
         characterLog = new CharacterLog();
-        runCharacterMenu();
+        runCharacterUI();
     }
 
     // EFFECTS: Initiates the main menu loop where users can choose different actions.
-    public void runCharacterMenu() {
+    public void runCharacterUI() {
         String response;
         while (true) {
             displayCharacterMenu();
@@ -40,7 +37,8 @@ public class CharacterUI {
         System.out.println("\nActions: ");
         System.out.println("\t1 -> New Character");
         System.out.println("\t2 -> Saved Characters");
-        System.out.println("\t3 -> Quit");
+        System.out.println("\t3 -> Remove Character");
+        System.out.println("\t4 -> Quit");
         System.out.println("Enter a number:");
     }
 
@@ -56,6 +54,12 @@ public class CharacterUI {
                 System.out.println("There is no existing character available!");
             }
         } else if (response.equals("3")) {
+            if (characterLog.getNumCharacters() != 0) {
+                removeCharacter();
+            } else {
+                System.out.println("There is no existing character available!");
+            }
+        } else if (response.equals("4")) {
             System.out.println("Thanks for playing!");
             System.exit(0);
         } else {
@@ -76,8 +80,8 @@ public class CharacterUI {
             confirmInfo();
         } while (confirmCreate());
         createCharacter();
-        System.out.println("Character created successfully!");
-        System.out.println("Press enter to continue.");
+        System.out.println("\nCharacter created successfully!");
+        System.out.println("\nPress enter to continue.");
         scanner.nextLine();
         scanner.nextLine();
     }
@@ -166,15 +170,16 @@ public class CharacterUI {
             return false;
         } else if (confirm.equals("N")) {
             return true;
+        } else {
+            System.out.println("Invalid input. It should be Y or N.");
+            return confirmCreate();
         }
-        System.out.println("Invalid input. It should be Y or N.");
-        return confirmCreate();
     }
 
     // MODIFIES: this
     // EFFECTS: Creates a new character based on the user's choices and adds it to the character log.
     private void createCharacter() {
-        Character character = new Character(0,0,0);
+        Character character;
         if (rpClass == 0) {
             character = new Barbarian();
         } else if (rpClass == 1) {
@@ -188,34 +193,82 @@ public class CharacterUI {
     }
 
     /********************************************
-     * This is where we run the saved characters option after selecting 2 in the main menu *
+     * This is where we display the saved characters after selecting 2 or 3 in the main menu *
      ********************************************/
-
-
-    // EFFECTS: Display the list of saved characters and initializes a new RPGschool object.
-    public void savedCharacter() {
-        displayCharacters();
-        Character selectedCharacter = selectCharacter();
-        System.out.println("You selected: " + selectedCharacter.getName());
-        new SchoolUI(selectedCharacter);
-    }
 
     // EFFECTS: display the list of characters available in the character log.
     public void displayCharacters() {
-        System.out.println("Select a character:");
-        characterLog.displayCharactersName();
+        System.out.println("\nCreated characters:");
+        for (int i = 0; i < characterLog.getNumCharacters(); i++) {
+            System.out.println((i + 1) + ". " + characterLog.getCharacter(i).getName());
+        }
+    }
+
+    /********************************************
+     * This is where we run the procedure after selecting 2 in the main menu *
+     ********************************************/
+
+    // EFFECTS: Display the list of saved characters and initializes a new SchoolUI object.
+    public void savedCharacter() {
+        displayCharacters();
+        Character selectedCharacter = selectCharacter();
+        System.out.println("\nYou selected: " + selectedCharacter.getName());
+        new SchoolUI(selectedCharacter);
     }
 
     // REQUIRES: choice should be a valid input of integer.
     // EFFECTS: select a character based on user's input.
     public Character selectCharacter() {
-        System.out.print("Enter a number of the character you want to select: ");
+        System.out.print("\nEnter a number of the character you want to select: ");
         int choice = scanner.nextInt();
         if (choice >= 1 && choice <= characterLog.getNumCharacters()) {
             return characterLog.getCharacter(choice - 1);
         } else {
-            System.out.println("Invalid choice. Please select a valid character.");
+            System.out.println("There is no such character! Choose again.");
             return selectCharacter();
+        }
+    }
+
+    /********************************************
+     * This is where we run the procedure after selecting 3 in the main menu *
+     ********************************************/
+
+    // REQUIRES: choice should be a valid input of integer.
+    // MODIFIES: this
+    // EFFECTS: removes a character based on user's input.
+    public void removeCharacter() {
+        displayCharacters();
+        System.out.print("\nEnter a number of the character you want to remove: ");
+        int choice = scanner.nextInt();
+        if (choice >= 1 && choice <= characterLog.getNumCharacters()) {
+            String name = characterLog.getCharacter(choice - 1).getName();
+            boolean confirm = confirmRemove(name);
+            if (confirm) {
+                characterLog.removeCharacter(choice - 1);
+                System.out.println(name + " successfully removed.");
+                System.out.println("\nPress enter to continue.");
+                scanner.nextLine();
+                scanner.nextLine();
+            }
+        } else {
+            System.out.println("There is no such character! Choose again");
+            removeCharacter();
+        }
+    }
+
+    // EFFECTS: returns true if the user input "Y" to confirm removing the character.
+    public boolean confirmRemove(String name) {
+        System.out.println("\nWARNING: NOTE THAT CHANGES CANNOT BE REVERTED. ALL DATA WILL BE LOST.");
+        System.out.println("Are you sure to remove " + name + "? (Y/N)");
+        String response = scanner.next();
+        response = response.toUpperCase();
+        if (response.equals("Y")) {
+            return true;
+        } else if (response.equals("N")) {
+            return false;
+        } else {
+            System.out.println("Invalid input. It should be Y or N.");
+            return confirmCreate();
         }
     }
 }

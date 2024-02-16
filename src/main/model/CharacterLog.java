@@ -13,18 +13,16 @@ public class CharacterLog {
         characterLog.add(c);
     }
 
+    public void removeCharacter(int i) {
+        characterLog.remove(i);
+    }
+
     public int getNumCharacters() {
         return characterLog.size();
     }
 
     public Character getCharacter(int i) {
         return characterLog.get(i);
-    }
-
-    public void displayCharactersName() {
-        for (int i = 0; i < getNumCharacters(); i++) {
-            System.out.println((i + 1) + ". " + getCharacter(i).getName());
-        }
     }
 
 }
