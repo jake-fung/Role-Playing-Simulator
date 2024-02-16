@@ -72,7 +72,7 @@ public class SchoolUI {
 
     // EFFECTS: instantiate the 'Trainer' class and run the training session for the user.
     public void trainingCenter(Character c) {
-        Trainer trainer = new Trainer();
+        Trainer trainer = new Trainer("src/randomWords.txt");
         displayIntro();
         runTrainer(trainer);
         calculateResult(c, trainer);

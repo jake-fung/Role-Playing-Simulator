@@ -34,10 +34,13 @@ public class CharacterLog {
     // EFFECTS: Returns the Character object at the specified index i from the characterLog list. If the index is out of
     // bounds, returns null.
     public Character getCharacter(int i) {
-        if (i >= 0 && i <= characterLog.size()) {
-            return characterLog.get(i);
+        try {
+            if (i >= 0) {
+                return characterLog.get(i);
+            }
+            return null;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
-        return null;
     }
-
 }

@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TrainerTest {
 
     private Trainer trainer;
+    private List<String> wordList;
 
     @BeforeEach
     public void setUp() {
-        trainer = new Trainer();
+        trainer = new Trainer("src/randomWords.txt");
+        wordList = Trainer.readWords("src/randomWords.txt");
     }
 
     @Test
@@ -22,7 +24,6 @@ public class TrainerTest {
 
     @Test
     public void testGetRandomWord() {
-        List<String> wordList = Trainer.readWords();
         String randomWord = trainer.getRandomWord();
         assertTrue(wordList.contains(randomWord));
     }
