@@ -72,6 +72,7 @@ class CharacterLogTest {
 
     @Test
     public void testGetCharacter() {
+        assertNull(characterLogFull.getCharacter(-1));
         assertEquals(alex, characterLogFull.getCharacter(0));
         assertEquals(bob, characterLogFull.getCharacter(1));
         assertEquals(charlie, characterLogFull.getCharacter(2));

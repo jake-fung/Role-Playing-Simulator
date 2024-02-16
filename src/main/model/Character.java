@@ -1,5 +1,6 @@
 package model;
 
+// Represents a character.
 public class Character {
     protected String name;
     protected boolean isMale;
@@ -8,6 +9,8 @@ public class Character {
     protected int attackPower;
     protected int defensePower;
 
+    // EFFECTS: Constructs a new Character object with an empty name, false isMale (to be set later) and 0 experience
+    // points, health, attackPower and defensePower are set by separate classes.
     public Character(int health, int attackPower, int defensePower) {
         this.name = "";
         this.isMale = false;
@@ -17,11 +20,13 @@ public class Character {
         this.defensePower = defensePower;
     }
 
+    // REQUIRES: amount >= 0
+    // MODIFIES: this
+    // EFFECTS: Add amount into experience points.
     public void gainExperience(int amount) {
         setExperience(getExperience() + amount);
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }

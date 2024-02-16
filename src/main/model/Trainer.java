@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+// Represents a trainer game.
 public class Trainer {
     private List<String> wordList;
     private Random random = new Random();
@@ -19,6 +20,9 @@ public class Trainer {
         wordCount = 0;
     }
 
+    // EFFECTS: Reads lines of text from the "src/randomWords.txt" file and returns a 'List' containing those lines as
+    // 'String' objects. If the file is not accessible or does not exist, prints an error message and
+    // returns an empty 'List'.
     public static List<String> readWords() {
         List<String> wordList = new ArrayList<>();
 
@@ -33,15 +37,19 @@ public class Trainer {
         return wordList;
     }
 
+    // EFFECTS: Returns a randomly selected String from the wordList.
     public String getRandomWord() {
         int index = random.nextInt(wordList.size());
         return wordList.get(index);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Increases the wordCount by 1
     public void addWordCount() {
         wordCount++;
     }
 
+    // EFFECTS: Returns the current value of wordCount.
     public int getWordCount() {
         return wordCount;
     }

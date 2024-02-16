@@ -60,7 +60,7 @@ public class CharacterUI {
                 System.out.println("There is no existing character available!");
             }
         } else if (response.equals("4")) {
-            System.out.println("Thanks for playing!");
+            System.out.println("\nThanks for playing!");
             System.exit(0);
         } else {
             System.out.println("Invalid input! Please enter a number.");
@@ -221,7 +221,7 @@ public class CharacterUI {
     public Character selectCharacter() {
         System.out.print("\nEnter a number of the character you want to select: ");
         int choice = scanner.nextInt();
-        if (choice >= 1 && choice <= characterLog.getNumCharacters()) {
+        if (characterLog.getCharacter(choice - 1) != null) {
             return characterLog.getCharacter(choice - 1);
         } else {
             System.out.println("There is no such character! Choose again.");
