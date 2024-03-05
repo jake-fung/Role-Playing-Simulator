@@ -2,28 +2,70 @@ package ui;
 
 import model.*;
 import model.Character;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // The CharacterUI class represents a CUI interface for a character in a role-playing game (RPG).
 // It serves as a main ui for creating a character and selecting a character.
 public class CharacterUI {
-    private final CharacterLog characterLog;
+    private static final String JSON_STORE = "./data/characterlog.json";
+    private CharacterLog characterLog;
     private final Scanner scanner;
     private String name;
     private boolean isMale;
     private int rpClass;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: Constructs a new `CharacterUI` object and initializes the `characterLog` and `scanner` fields.
     public CharacterUI() {
         scanner = new Scanner(System.in);
         scanner.useDelimiter("\n");
         characterLog = new CharacterLog();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runCharacterUI();
     }
 
     // EFFECTS: Initiates the main menu loop where users can choose different actions.
     public void runCharacterUI() {
+        String response;
+        while (true) {
+            displayCharacterLogMenu();
+            response = scanner.next();
+            selectCharacterLogMenu(response);
+        }
+    }
+
+    private void displayCharacterLogMenu() {
+        System.out.println("\nActions: ");
+        System.out.println("\t1 -> New Builder");
+        System.out.println("\t2 -> Load Previous Builder");
+        System.out.println("\t3 -> Save Current Builder");
+        System.out.println("\t4 -> Quit");
+        System.out.println("Enter a number:");
+    }
+
+    private void selectCharacterLogMenu(String response) {
+        if (response.equals("1")) {
+            characterMenu();
+        } else if (response.equals("2")) {
+            loadCharacterLog();
+        } else if (response.equals("3")) {
+            saveCharacterLog();
+        } else if (response.equals("4")) {
+            System.out.println("\nThanks for playing!");
+            System.exit(0);
+        } else {
+            System.out.println("Invalid input! Please enter a number.");
+        }
+    }
+
+    public void characterMenu() {
         String response;
         while (true) {
             displayCharacterMenu();
@@ -38,7 +80,7 @@ public class CharacterUI {
         System.out.println("\t1 -> New Character");
         System.out.println("\t2 -> Saved Characters");
         System.out.println("\t3 -> Remove Character");
-        System.out.println("\t4 -> Quit");
+        System.out.println("\t4 -> Return to Main Menu");
         System.out.println("Enter a number:");
     }
 
@@ -60,8 +102,7 @@ public class CharacterUI {
                 System.out.println("There is no existing character available!");
             }
         } else if (response.equals("4")) {
-            System.out.println("\nThanks for playing!");
-            System.exit(0);
+            runCharacterUI();
         } else {
             System.out.println("Invalid input! Please enter a number.");
         }
@@ -269,6 +310,27 @@ public class CharacterUI {
         } else {
             System.out.println("Invalid input. It should be Y or N.");
             return confirmCreate();
+        }
+    }
+
+    private void loadCharacterLog() {
+        try {
+            characterLog = jsonReader.read();
+            System.out.println("Loaded your saved builder from " + JSON_STORE + "!");
+            characterMenu();
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    public void saveCharacterLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(characterLog);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE + "!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 }

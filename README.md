@@ -34,4 +34,6 @@ their name, gender, and classes (e.g. Barbarians, Knights, Rangers).
 
 - As a player, I want to be able to monitor my character's progression, including tracking experience points. upgrading them, and unlocked abilities.
 
-- As a player, I want to be able to save and load my character's progress, ensuring I can continue my gaming sessions seamlessly.
+- As a player, I want to be able to save my character list I just created into a file.
+
+- As a player, I want to be given an option to load my character list from a file.

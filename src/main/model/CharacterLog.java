@@ -1,9 +1,13 @@
 package model;
 
 // Represents a character log for character storage.
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class CharacterLog {
+public class CharacterLog implements Writable {
     ArrayList<Character> characterLog;
 
     // EFFECTS: Constructs a new CharacterLog object with an empty list.
@@ -42,5 +46,22 @@ public class CharacterLog {
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("characters", characterstoJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray characterstoJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Character character : characterLog) {
+            jsonArray.put(character.toJson());
+        }
+        return jsonArray;
     }
 }

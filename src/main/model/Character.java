@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a character.
-public class Character {
+public class Character implements Writable {
     protected String name;
     protected boolean isMale;
     protected int experience;
@@ -73,5 +76,17 @@ public class Character {
 
     public void setDefensePower(int defensePower) {
         this.defensePower = defensePower;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("isMale", isMale);
+        json.put("experience", experience);
+        json.put("health", health);
+        json.put("attackPower", attackPower);
+        json.put("defensePower", defensePower);
+        return json;
     }
 }

@@ -27,5 +27,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Data Persistence Phase 2" level="project" />
   </component>
 </module>
