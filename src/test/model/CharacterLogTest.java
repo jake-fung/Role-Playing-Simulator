@@ -14,7 +14,7 @@ class CharacterLogTest {
     CharacterLog characterLogFull;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         characterLog = new CharacterLog();
         alex = new Character(10, 10, 10);
         bob = new Character(20, 30, 40);
@@ -26,14 +26,14 @@ class CharacterLogTest {
     }
 
     @Test
-    public void testAddCharacterOneCharacter() {
+    void testAddCharacterOneCharacter() {
         assertEquals(0, characterLog.getNumCharacters());
         characterLog.addCharacter(alex);
         assertEquals(1, characterLog.getNumCharacters());
     }
 
     @Test
-    public void testAddCharacterMultipleCharacter() {
+    void testAddCharacterMultipleCharacter() {
         assertEquals(0, characterLog.getNumCharacters());
         characterLog.addCharacter(alex);
         characterLog.addCharacter(bob);
@@ -42,7 +42,7 @@ class CharacterLogTest {
     }
 
     @Test
-    public void testRemoveCharacter() {
+    void testRemoveCharacter() {
         assertEquals(alex, characterLogFull.getCharacter(0));
         assertEquals(3, characterLogFull.getNumCharacters());
         characterLogFull.removeCharacter(0);
@@ -51,7 +51,7 @@ class CharacterLogTest {
     }
 
     @Test
-    public void testRemoveMultipleCharacter() {
+    void testRemoveMultipleCharacter() {
         assertEquals(alex, characterLogFull.getCharacter(0));
         assertEquals(3, characterLogFull.getNumCharacters());
         characterLogFull.removeCharacter(0);
@@ -61,17 +61,17 @@ class CharacterLogTest {
     }
 
     @Test
-    public void testGetNumItemsEmptyList() {
+    void testGetNumItemsEmptyList() {
         assertEquals(0, characterLog.getNumCharacters());
     }
 
     @Test
-    public void testGetNumItemsFullList() {
+    void testGetNumItemsFullList() {
         assertEquals(3, characterLogFull.getNumCharacters());
     }
 
     @Test
-    public void testGetCharacter() {
+    void testGetCharacter() {
         assertNull(characterLogFull.getCharacter(-1));
         assertEquals(alex, characterLogFull.getCharacter(0));
         assertEquals(bob, characterLogFull.getCharacter(1));

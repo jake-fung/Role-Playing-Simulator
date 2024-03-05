@@ -8,7 +8,7 @@ class CharacterTest {
     Character john = new Character(10, 10, 10);
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Character alex = new Character(10, 20, 30);
         assertEquals(10, alex.getHealth());
         assertEquals(20, alex.getAttackPower());
@@ -24,21 +24,21 @@ class CharacterTest {
     }
 
     @Test
-    public void testSetAndGetName() {
+    void testSetAndGetName() {
         john.setName("Jane");
         String name = john.getName();
         assertEquals("Jane", name);
     }
 
     @Test
-    public void testSetAndGetIsMale() {
+    void testSetAndGetIsMale() {
         john.setIsMale(false);
         boolean isMale = john.getIsMale();
         assertFalse(isMale);
     }
 
     @Test
-    public void testSetAndGetExperience() {
+    void testSetAndGetExperience() {
         assertEquals(0, john.getExperience());
         john.setExperience(100);
         int exp = john.getExperience();
@@ -46,7 +46,7 @@ class CharacterTest {
     }
 
     @Test
-    public void testSetAndGetHealth() {
+    void testSetAndGetHealth() {
         assertEquals(10, john.getHealth());
         john.setHealth(100);
         int health = john.getHealth();
@@ -54,7 +54,7 @@ class CharacterTest {
     }
 
     @Test
-    public void testSetAndGetAttackPower() {
+    void testSetAndGetAttackPower() {
         assertEquals(10, john.getAttackPower());
         john.setAttackPower(20);
         int attack = john.getAttackPower();
@@ -62,7 +62,7 @@ class CharacterTest {
     }
 
     @Test
-    public void testSetAndGetDefensePower() {
+    void testSetAndGetDefensePower() {
         assertEquals(10, john.getDefensePower());
         john.setDefensePower(30);
         int defense = john.getDefensePower();

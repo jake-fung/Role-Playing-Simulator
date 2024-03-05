@@ -48,6 +48,7 @@ public class CharacterLog implements Writable {
         }
     }
 
+    // EFFECTS: returns a CharacterLog as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -55,7 +56,7 @@ public class CharacterLog implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns Character in this CharacterLog as a JSON array
     private JSONArray characterstoJson() {
         JSONArray jsonArray = new JSONArray();
 

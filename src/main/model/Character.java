@@ -78,6 +78,7 @@ public class Character implements Writable {
         this.defensePower = defensePower;
     }
 
+    // EFFECTS: returns a Character as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

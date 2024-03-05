@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
+// Represents a reader that reads CharacterLog from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -20,7 +20,8 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+
+    // EFFECTS: reads CharacterLog from file and returns it;
     // throws IOException if an error occurs reading data from file
     public CharacterLog read() throws IOException {
         String jsonData = readFile(source);
@@ -28,6 +29,7 @@ public class JsonReader {
         return parseCharacterLog(jsonObject);
     }
 
+    // EFFECTS: parses CharacterLog from JSON object and returns it
     public CharacterLog parseCharacterLog(JSONObject jsonObject) {
         CharacterLog cl = new CharacterLog();
         JSONArray jsonArray = jsonObject.getJSONArray("characters");
@@ -38,6 +40,8 @@ public class JsonReader {
         return cl;
     }
 
+    //MODIFIES: cl
+    //EFFECTS: parses Character from JSON object and adds them to CharacterLog
     private void addCharacterToCharacterLog(CharacterLog cl, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         boolean isMale = jsonObject.getBoolean("isMale");

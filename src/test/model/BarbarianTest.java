@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BarbarianTest {
 
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Character aman = new Barbarian();
         assertEquals(120, aman.getHealth());
         assertEquals(25, aman.getAttackPower());

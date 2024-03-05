@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KnightTest {
     @Test
-    public void testConstructor() {
+    void testConstructor() {
         Character aman = new Knight();
         assertEquals(100, aman.getHealth());
         assertEquals(20, aman.getAttackPower());
