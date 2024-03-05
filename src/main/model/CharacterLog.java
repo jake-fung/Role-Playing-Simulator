@@ -52,12 +52,12 @@ public class CharacterLog implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("characters", characterstoJson());
+        json.put("characters", charactersToJson());
         return json;
     }
 
     // EFFECTS: returns Character in this CharacterLog as a JSON array
-    private JSONArray characterstoJson() {
+    private JSONArray charactersToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Character character : characterLog) {

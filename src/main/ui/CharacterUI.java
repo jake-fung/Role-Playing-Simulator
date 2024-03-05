@@ -32,7 +32,7 @@ public class CharacterUI {
     }
 
     // EFFECTS: Initiates the main menu loop where users can choose different actions.
-    public void runCharacterUI() {
+    private void runCharacterUI() {
         String response;
         while (true) {
             displayCharacterLogMenu();
@@ -41,6 +41,7 @@ public class CharacterUI {
         }
     }
 
+    // EFFECTS: Display the main menu options for the user to choose a new builder or use a saved builder.
     private void displayCharacterLogMenu() {
         System.out.println("\nActions: ");
         System.out.println("\t1 -> New Builder");
@@ -50,6 +51,8 @@ public class CharacterUI {
         System.out.println("Enter a number:");
     }
 
+    // REQUIRES: response must be a valid integer input.
+    // EFFECTS: Selects and executes the corresponding action based on the user's menu choice.
     private void selectCharacterLogMenu(String response) {
         if (response.equals("1")) {
             characterMenu();
@@ -65,7 +68,8 @@ public class CharacterUI {
         }
     }
 
-    public void characterMenu() {
+    // EFFECTS: Initiates the character menu loop where users can choose different actions.
+    private void characterMenu() {
         String response;
         while (true) {
             displayCharacterMenu();
@@ -74,8 +78,8 @@ public class CharacterUI {
         }
     }
 
-    // EFFECTS: Displays the main menu options to the user.
-    public void displayCharacterMenu() {
+    // EFFECTS: Displays the character menu options to the user after choosing to use a new builder or saved builder.
+    private void displayCharacterMenu() {
         System.out.println("\nActions: ");
         System.out.println("\t1 -> New Character");
         System.out.println("\t2 -> Saved Characters");
@@ -86,7 +90,7 @@ public class CharacterUI {
 
     // REQUIRES: response must be a valid integer input.
     // EFFECTS: Selects and executes the corresponding action based on the user's menu choice.
-    public void selectCharacterMenu(String response) {
+    private void selectCharacterMenu(String response) {
         if (response.equals("1")) {
             characterBuilder();
         } else if (response.equals("2")) {
@@ -113,7 +117,7 @@ public class CharacterUI {
      ********************************************/
 
     // EFFECTS: Initiates the character creation process, allowing users to create a new character.
-    public void characterBuilder() {
+    private void characterBuilder() {
         do {
             chooseName();
             chooseGender();
@@ -130,7 +134,7 @@ public class CharacterUI {
 
     // MODIFIES: this
     // EFFECTS: choose a name for the character.
-    public void chooseName() {
+    private void chooseName() {
         System.out.println("\nPlease choose a name for your character: ");
         name = scanner.next();
         System.out.println("Welcome " + name + "!");
@@ -138,7 +142,7 @@ public class CharacterUI {
 
     // MODIFIES: this
     // EFFECTS: choose a gender for the character.
-    public void chooseGender() {
+    private void chooseGender() {
         String response;
 
         System.out.println("\nIs " + name + " a male or female? (M/F)");
@@ -164,7 +168,7 @@ public class CharacterUI {
     // MODIFIES: this
     // EFFECTS: choose a class for the character, return 0 for barbarians, 1 for knights
     // 2 for rangers.
-    public void chooseClass() {
+    private void chooseClass() {
         System.out.println("\nChoose a class for " + name + ".");
         System.out.println("\t1 -> Barbarians");
         System.out.println("\t2 -> Knights");
@@ -187,7 +191,7 @@ public class CharacterUI {
     }
 
     // EFFECTS: Displays the review of the character's information for confirmation.
-    public void confirmInfo() {
+    private void confirmInfo() {
         System.out.println("\nReview your characters!");
         System.out.println("\tName: " + name);
         System.out.println("\tGender: " + (isMale ? "Male" : "Female"));
@@ -201,7 +205,7 @@ public class CharacterUI {
     }
 
     // EFFECTS: Prompts the user to confirm if they wish to continue character creation.
-    public boolean confirmCreate() {
+    private boolean confirmCreate() {
         String confirm;
 
         System.out.println("\nDo you wish to continue? (Y/N)");
@@ -238,7 +242,7 @@ public class CharacterUI {
      ********************************************/
 
     // EFFECTS: display the list of characters available in the character log.
-    public void displayCharacters() {
+    private void displayCharacters() {
         System.out.println("\nCreated characters:");
         for (int i = 0; i < characterLog.getNumCharacters(); i++) {
             System.out.println((i + 1) + ". " + characterLog.getCharacter(i).getName());
@@ -250,7 +254,7 @@ public class CharacterUI {
      ********************************************/
 
     // EFFECTS: Display the list of saved characters and initializes a new SchoolUI object.
-    public void savedCharacter() {
+    private void savedCharacter() {
         displayCharacters();
         Character selectedCharacter = selectCharacter();
         System.out.println("\nYou selected: " + selectedCharacter.getName());
@@ -259,7 +263,7 @@ public class CharacterUI {
 
     // REQUIRES: choice should be a valid input of integer.
     // EFFECTS: select a character based on user's input.
-    public Character selectCharacter() {
+    private Character selectCharacter() {
         System.out.print("\nEnter a number of the character you want to select: ");
         int choice = scanner.nextInt();
         if (characterLog.getCharacter(choice - 1) != null) {
@@ -277,7 +281,7 @@ public class CharacterUI {
     // REQUIRES: choice should be a valid input of integer.
     // MODIFIES: this
     // EFFECTS: removes a character based on user's input.
-    public void removeCharacter() {
+    private void removeCharacter() {
         displayCharacters();
         System.out.print("\nEnter a number of the character you want to remove: ");
         int choice = scanner.nextInt();
@@ -298,7 +302,7 @@ public class CharacterUI {
     }
 
     // EFFECTS: returns true if the user input "Y" to confirm removing the character.
-    public boolean confirmRemove(String name) {
+    private boolean confirmRemove(String name) {
         System.out.println("\nWARNING: NOTE THAT CHANGES CANNOT BE REVERTED. ALL DATA WILL BE LOST.");
         System.out.println("Are you sure to remove " + name + "? (Y/N)");
         String response = scanner.next();
@@ -313,6 +317,9 @@ public class CharacterUI {
         }
     }
 
+    // Method taken from WorkRoomApp class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: saves the CharacterLog to file
     private void loadCharacterLog() {
         try {
             characterLog = jsonReader.read();
@@ -323,7 +330,11 @@ public class CharacterUI {
         }
     }
 
-    public void saveCharacterLog() {
+    // Method taken from WorkRoomApp class in
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads CharacterLog from file
+    private void saveCharacterLog() {
         try {
             jsonWriter.open();
             jsonWriter.write(characterLog);

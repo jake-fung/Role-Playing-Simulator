@@ -11,8 +11,6 @@ import java.util.Random;
 public class Trainer {
     private List<String> wordList;
     private Random random = new Random();
-    private FileReader fileReader;
-    private String word;
     private int wordCount;
 
     public Trainer(String path) {

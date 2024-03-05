@@ -1,26 +1,31 @@
-{"characters": [
+{
+  "characters": [
     {
-        "defensePower": 15,
-        "isMale": true,
-        "attackPower": 20,
-        "name": "jake",
-        "health": 100,
-        "experience": 19
+      "defensePower": 10,
+      "isMale": true,
+      "attackPower": 25,
+      "level": 10,
+      "name": "Jake",
+      "health": 120,
+      "experience": 3
     },
     {
-        "defensePower": 5,
-        "isMale": true,
-        "attackPower": 30,
-        "name": "Alex",
-        "health": 80,
-        "experience": 30
+      "defensePower": 15,
+      "isMale": false,
+      "attackPower": 20,
+      "level": 6,
+      "name": "Abelle",
+      "health": 100,
+      "experience": 0
     },
     {
-        "defensePower": 5,
-        "isMale": false,
-        "attackPower": 30,
-        "name": "roger",
-        "health": 80,
-        "experience": 0
+      "defensePower": 5,
+      "isMale": true,
+      "attackPower": 30,
+      "level": 7,
+      "name": "Tyler",
+      "health": 80,
+      "experience": 20
     }
-]}
+  ]
+}

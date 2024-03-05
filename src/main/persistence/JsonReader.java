@@ -46,6 +46,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         boolean isMale = jsonObject.getBoolean("isMale");
         int experience = jsonObject.getInt("experience");
+        int level = jsonObject.getInt("level");
         int health = jsonObject.getInt("health");
         int attackPower = jsonObject.getInt("attackPower");
         int defensePower = jsonObject.getInt("defensePower");
@@ -53,6 +54,7 @@ public class JsonReader {
         character.setName(name);
         character.setIsMale(isMale);
         character.setExperience(experience);
+        character.setLevel(level);
         cl.addCharacter(character);
     }
 

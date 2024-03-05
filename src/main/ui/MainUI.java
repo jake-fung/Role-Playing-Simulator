@@ -1,6 +1,5 @@
 package ui;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 // The MainUI class serves as a main ui for starting the whole application.
@@ -15,7 +14,7 @@ public class MainUI {
     }
 
     // EFFECTS: display the title screen.
-    public void runTitle() {
+    private void runTitle() {
         System.out.println("\nWelcome to RPG Character Builder!");
         System.out.println("\nIt features an interactive application where players can customize their own unique "
                 + "characters, including appearance, personality, and skills, and then guide them through a series of "

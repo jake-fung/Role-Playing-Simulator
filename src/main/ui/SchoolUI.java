@@ -18,7 +18,7 @@ public class SchoolUI {
     }
 
     // EFFECTS: Instantiate a loop for the school menu for user to choose different actions for the character.
-    public void runSchoolUI(Character c) {
+    private void runSchoolUI(Character c) {
         boolean keepGoing;
         do {
             displayCharacterStats(c);
@@ -28,17 +28,18 @@ public class SchoolUI {
     }
 
     // EFFECTS: Displays the character statistics to the user.
-    public void displayCharacterStats(Character c) {
+    private void displayCharacterStats(Character c) {
         System.out.println("\n\tName: " + c.getName());
         System.out.println("\tSex: " + (c.getIsMale() ? "Male" : "Female"));
         System.out.println("\tExp: " + c.getExperience());
+        System.out.println("\tLevel: " + c.getLevel());
         System.out.println("\tHealth: " + c.getHealth());
         System.out.println("\tAttack Power: " + c.getAttackPower());
         System.out.println("\tDefense Power: " + c.getDefensePower());
     }
 
     // EFFECTS: Displays the school menu options to the user.
-    public void displaySchoolMenu() {
+    private void displaySchoolMenu() {
         System.out.println("\nWelcome to the academy!");
         System.out.println("\tHere you can train your character to obtain special abilities and enhance their skills! "
                 + "Train and earn experience points by completing challenges!");
@@ -46,22 +47,26 @@ public class SchoolUI {
                 + "and become a more formidable force in the game! ");
         System.out.println("\nActions: ");
         System.out.println("\t1. Train");
-        System.out.println("\t2. Gain special ability");
-        System.out.println("\t3. Quit academy");
+        System.out.println("\t2. Level up");
+        System.out.println("\t3. Gain special ability");
+        System.out.println("\t4. Quit academy");
     }
 
     // REQUIRES: response must be a valid integer input.
     // EFFECTS: Selects and executes the corresponding action based on the user's menu choice.
-    public boolean selectSchoolMenu(Character c) {
+    private boolean selectSchoolMenu(Character c) {
         System.out.println("Enter a number: ");
         String response = scanner.next();
         if (response.equals("1")) {
             trainingCenter(c);
             return true;
         } else if (response.equals("2")) {
-            // gainSpecialAbility(c);
+            levelUp(c);
             return true;
         } else if (response.equals("3")) {
+            // gainSpecialAbility(c);
+            return true;
+        } else if (response.equals("4")) {
             return false;
         } else {
             System.out.println("Invalid input!");
@@ -71,7 +76,7 @@ public class SchoolUI {
     }
 
     // EFFECTS: instantiate the 'Trainer' class and run the training session for the user.
-    public void trainingCenter(Character c) {
+    private void trainingCenter(Character c) {
         Trainer trainer = new Trainer("src/randomWords.txt");
         displayIntro();
         runTrainer(trainer);
@@ -79,7 +84,7 @@ public class SchoolUI {
     }
 
     // EFFECTS: display the introduction of the training session.
-    public void displayIntro() {
+    private void displayIntro() {
         System.out.println("\nWelcome to the training session!");
         System.out.println("\tGet ready to sharpen your skills and earn experience points!");
         System.out.println("\tType the words correctly in order to gain experience points.");
@@ -94,7 +99,7 @@ public class SchoolUI {
     // MODIFIES: trainer
     // EFFECTS: Generate a set of random word and prompts for user's input, if the input is equal the target, earns one
     // point, or else earns no point.
-    public void runTrainer(Trainer trainer) {
+    private void runTrainer(Trainer trainer) {
         for (int i = 1; i <= 10; i++) {
             String word = trainer.getRandomWord();
             System.out.println("\n" + word + " ");
@@ -110,7 +115,7 @@ public class SchoolUI {
 
 
     // EFFECTS: calculate the result of the training game and convert into experience points.
-    public void calculateResult(Character c, Trainer trainer) {
+    private void calculateResult(Character c, Trainer trainer) {
         System.out.println("\nTest completed!");
         System.out.println(c.getName() + " has earned " + trainer.getWordCount() + " experience points from training!");
         c.gainExperience(trainer.getWordCount());
@@ -119,7 +124,31 @@ public class SchoolUI {
         scanner.nextLine();
     }
 
-//    public void gainSpecialAbility(Character c) {
+    private void levelUp(Character c) {
+        displayLevelUpMessage();
+        completeLevelUp(c);
+    }
+
+    private void displayLevelUpMessage() {
+        System.out.println("For every 20 experience points, you are able to level up!");
+        System.out.println("You are able to earn new abilities once you reach a certain level.");
+        System.out.println("Are you ready? Press enter to level up!");
+        scanner.nextLine();
+        scanner.nextLine();
+    }
+
+    private void completeLevelUp(Character c) {
+        boolean complete = c.levelUp();
+        if (complete) {
+            System.out.println("Your character is now Level " + c.getLevel() + "!");
+        } else {
+            System.out.println("Your character should have at least 20 experience points!");
+        }
+        System.out.println("Press enter to continue.");
+        scanner.nextLine();
+    }
+
+//    private void gainSpecialAbility(Character c) {
 //        System.out.println("What ability do you want " + c.getName() + " gain?");
 //        String ability = scanner.next();
 //        switch (ability.toLowerCase()) {

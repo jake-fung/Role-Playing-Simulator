@@ -16,11 +16,43 @@ class CharacterTest {
     }
 
     @Test
-    void gainExperience() {
+    void testGainExperience() {
         Character bob = new Character(20, 30, 40);
         assertEquals(0, bob.getExperience());
         bob.gainExperience(10);
         assertEquals(10, bob.getExperience());
+    }
+
+    @Test
+    void testLevelUpNotEnoughExperience() {
+        Character charlie = new Character(0, 0, 0);
+        assertEquals(0, charlie.getExperience());
+        assertFalse(charlie.levelUp());
+        assertEquals(1, charlie.getLevel());
+    }
+
+    @Test
+    void testLevelUpEnoughExperience() {
+        Character david = new Character(0, 0, 0);
+        david.setExperience(20);
+        assertEquals(20, david.getExperience());
+        assertTrue(david.levelUp());
+        assertEquals(2, david.getLevel());
+        assertEquals(20, david.getHealth());
+        assertEquals(5, david.getAttackPower());
+        assertEquals(5, david.getDefensePower());
+    }
+
+    @Test
+    void testLevelUpEnoughExperienceMultipleLevels() {
+        Character eva = new Character(0, 0, 0);
+        eva.setExperience(200);
+        assertEquals(200, eva.getExperience());
+        assertTrue(eva.levelUp());
+        assertEquals(10, eva.getLevel());
+        assertEquals(180, eva.getHealth());
+        assertEquals(45, eva.getAttackPower());
+        assertEquals(45, eva.getDefensePower());
     }
 
     @Test
@@ -43,6 +75,14 @@ class CharacterTest {
         john.setExperience(100);
         int exp = john.getExperience();
         assertEquals(100, exp);
+    }
+
+    @Test
+    void testSetAndGetLevel() {
+        assertEquals(1, john.getLevel());
+        john.setLevel(10);
+        int level = john.getLevel();
+        assertEquals(10, level);
     }
 
     @Test
