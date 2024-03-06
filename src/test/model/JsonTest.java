@@ -3,9 +3,10 @@ package model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonTest {
-    protected void assertCharacter(Character c, String name, boolean isMale, int experience, int level, int health, int attackPower, int defensePower) {
+    protected void assertCharacter(Character c, String name, boolean isMale, Classes classes, int experience, int level, int health, int attackPower, int defensePower) {
         assertEquals(name, c.getName());
         assertEquals(isMale, c.getIsMale());
+        assertEquals(classes, c.getClasses());
         assertEquals(experience, c.getExperience());
         assertEquals(level, c.getLevel());
         assertEquals(health, c.getHealth());

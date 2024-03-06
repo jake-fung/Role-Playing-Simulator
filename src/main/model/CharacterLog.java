@@ -1,6 +1,7 @@
 package model;
 
 // Represents a character log for character storage.
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;

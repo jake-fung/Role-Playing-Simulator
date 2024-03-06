@@ -24,7 +24,7 @@ public class TrainerTest {
 
     @Test
     void testConstructor() {
-        assertEquals(0,trainer.getWordCount());
+        assertEquals(0, trainer.getWordCount());
     }
 
     @Test

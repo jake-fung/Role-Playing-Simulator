@@ -4,6 +4,7 @@
         "isMale": true,
         "attackPower": 25,
         "level": 10,
+        "classes": "Barbarian",
         "name": "Jake",
         "health": 120,
         "experience": 3
@@ -13,6 +14,7 @@
         "isMale": false,
         "attackPower": 20,
         "level": 6,
+        "classes": "Knight",
         "name": "Abelle",
         "health": 100,
         "experience": 0
@@ -22,6 +24,7 @@
         "isMale": true,
         "attackPower": 30,
         "level": 7,
+        "classes": "Ranger",
         "name": "Tyler",
         "health": 80,
         "experience": 20

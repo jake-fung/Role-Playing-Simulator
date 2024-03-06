@@ -4,9 +4,10 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a character.
-public class Character implements Writable {
+public abstract class Character implements Writable {
     protected String name;
     protected boolean isMale;
+    protected Classes classes;
     protected int experience;
     protected int level;
     protected int health;
@@ -15,14 +16,11 @@ public class Character implements Writable {
 
     // EFFECTS: Constructs a new Character object with an empty name, false isMale (to be set later) and 0 experience
     // points, health, attackPower and defensePower are set by separate classes.
-    public Character(int health, int attackPower, int defensePower) {
+    public Character() {
         this.name = "";
         this.isMale = false;
         this.experience = 0;
         this.level = 1;
-        this.health = health;
-        this.attackPower = attackPower;
-        this.defensePower = defensePower;
     }
 
     // REQUIRES: amount >= 0
@@ -49,56 +47,70 @@ public class Character implements Writable {
         }
     }
 
+    public abstract void attainLevel10Abilities();
+
+    public abstract void attainLevel20Abilities();
+
+    public abstract void attainLevel30Abilities();
+
     public String getName() {
         return name;
-    }
-
-    public boolean getIsMale() {
-        return isMale;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getAttackPower() {
-        return attackPower;
-    }
-
-    public int getDefensePower() {
-        return defensePower;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public boolean getIsMale() {
+        return isMale;
+    }
+
     public void setIsMale(boolean isMale) {
         this.isMale = isMale;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
+    public int getExperience() {
+        return experience;
     }
 
     public void setExperience(int experience) {
         this.experience = experience;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public void setHealth(int health) {
         this.health = health;
     }
 
+    public int getAttackPower() {
+        return attackPower;
+    }
+
     public void setAttackPower(int attackPower) {
         this.attackPower = attackPower;
+    }
+
+    public int getDefensePower() {
+        return defensePower;
     }
 
     public void setDefensePower(int defensePower) {
@@ -111,6 +123,7 @@ public class Character implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("isMale", isMale);
+        json.put("classes", classes);
         json.put("experience", experience);
         json.put("level", level);
         json.put("health", health);

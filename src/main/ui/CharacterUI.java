@@ -1,7 +1,7 @@
 package ui;
 
-import model.*;
 import model.Character;
+import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -13,13 +13,13 @@ import java.util.Scanner;
 // It serves as a main ui for creating a character and selecting a character.
 public class CharacterUI {
     private static final String JSON_STORE = "./data/characterlog.json";
-    private CharacterLog characterLog;
     private final Scanner scanner;
+    private CharacterLog characterLog;
     private String name;
     private boolean isMale;
-    private int rpClass;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private Classes rpClass;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     // EFFECTS: Constructs a new `CharacterUI` object and initializes the `characterLog` and `scanner` fields.
     public CharacterUI() {
@@ -174,16 +174,10 @@ public class CharacterUI {
         System.out.println("\t2 -> Knights");
         System.out.println("\t3 -> Rangers");
         System.out.println("Enter a number: ");
-        String response = scanner.next();
-        if (response.equals("1")) {
-            System.out.println("You choose barbarians!");
-            rpClass = 0;
-        } else if (response.equals("2")) {
-            System.out.println("You choose knights!");
-            rpClass = 1;
-        } else if (response.equals("3")) {
-            System.out.println("You choose rangers!");
-            rpClass = 2;
+        int response = scanner.nextInt();
+        if (response >= 1 && response <= 3) {
+            rpClass = Classes.values()[response - 1];
+            System.out.println("You choose " + rpClass);
         } else {
             System.out.println("There is no such class! Choose again.");
             chooseClass();
@@ -195,13 +189,7 @@ public class CharacterUI {
         System.out.println("\nReview your characters!");
         System.out.println("\tName: " + name);
         System.out.println("\tGender: " + (isMale ? "Male" : "Female"));
-        if (rpClass == 0) {
-            System.out.println("\tClass: Barbarian");
-        } else if (rpClass == 1) {
-            System.out.println("\tClass: Knight");
-        } else {
-            System.out.println("\tClass: Ranger");
-        }
+        System.out.println("\tClass: " + rpClass);
     }
 
     // EFFECTS: Prompts the user to confirm if they wish to continue character creation.
@@ -225,9 +213,9 @@ public class CharacterUI {
     // EFFECTS: Creates a new character based on the user's choices and adds it to the character log.
     private void createCharacter() {
         Character character;
-        if (rpClass == 0) {
+        if (rpClass == Classes.Barbarian) {
             character = new Barbarian();
-        } else if (rpClass == 1) {
+        } else if (rpClass == Classes.Knight) {
             character = new Knight();
         } else {
             character = new Ranger();
@@ -303,8 +291,7 @@ public class CharacterUI {
 
     // EFFECTS: returns true if the user input "Y" to confirm removing the character.
     private boolean confirmRemove(String name) {
-        System.out.println("\nWARNING: NOTE THAT CHANGES CANNOT BE REVERTED. ALL DATA WILL BE LOST.");
-        System.out.println("Are you sure to remove " + name + "? (Y/N)");
+        System.out.println("\nAre you sure to remove " + name + "? (Y/N)");
         String response = scanner.next();
         response = response.toUpperCase();
         if (response.equals("Y")) {
@@ -316,6 +303,10 @@ public class CharacterUI {
             return confirmCreate();
         }
     }
+
+    /********************************************
+     * Method uses to save character data to a JSON object *
+     ********************************************/
 
     // Method taken from WorkRoomApp class in
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo

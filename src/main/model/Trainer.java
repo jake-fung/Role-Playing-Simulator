@@ -9,8 +9,8 @@ import java.util.Random;
 
 // Represents a trainer game.
 public class Trainer {
-    private List<String> wordList;
-    private Random random = new Random();
+    private final List<String> wordList;
+    private final Random random = new Random();
     private int wordCount;
 
     public Trainer(String path) {

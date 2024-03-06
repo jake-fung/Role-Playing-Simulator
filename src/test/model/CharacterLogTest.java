@@ -16,9 +16,9 @@ class CharacterLogTest {
     @BeforeEach
     void setUp() {
         characterLog = new CharacterLog();
-        alex = new Character(10, 10, 10);
-        bob = new Character(20, 30, 40);
-        charlie = new Character(50, 60, 10);
+        alex = new Barbarian();
+        bob = new Knight();
+        charlie = new Ranger();
         characterLogFull = new CharacterLog();
         characterLogFull.addCharacter(alex);
         characterLogFull.addCharacter(bob);

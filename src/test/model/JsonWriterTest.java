@@ -9,7 +9,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class JsonWriterTest extends JsonTest{
+public class JsonWriterTest extends JsonTest {
 
     @Test
     void testWriterInvalidFile() {
@@ -44,9 +44,9 @@ public class JsonWriterTest extends JsonTest{
     void testWriterGeneralWorkroom() {
         try {
             CharacterLog cl = new CharacterLog();
-            Character c0 = new Character(120, 25, 10);
-            Character c1 = new Character(100, 20, 15);
-            Character c2 = new Character(80, 30, 5);
+            Character c0 = new Barbarian();
+            Character c1 = new Knight();
+            Character c2 = new Ranger();
             c0.setName("Jake");
             c0.setIsMale(true);
             c0.setExperience(3);
@@ -70,9 +70,9 @@ public class JsonWriterTest extends JsonTest{
             JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
             cl = reader.read();
             assertEquals(3, cl.getNumCharacters());
-            assertCharacter(cl.getCharacter(0), "Jake", true, 3, 10, 120, 25, 10);
-            assertCharacter(cl.getCharacter(1), "Abelle", false, 0, 6, 100, 20, 15);
-            assertCharacter(cl.getCharacter(2), "Tyler", true, 20, 7, 80, 30, 5);
+            assertCharacter(cl.getCharacter(0), "Jake", true, Classes.Barbarian, 3, 10, 120, 25, 10);
+            assertCharacter(cl.getCharacter(1), "Abelle", false, Classes.Knight, 0, 6, 100, 20, 15);
+            assertCharacter(cl.getCharacter(2), "Tyler", true, Classes.Ranger, 20, 7, 80, 30, 5);
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

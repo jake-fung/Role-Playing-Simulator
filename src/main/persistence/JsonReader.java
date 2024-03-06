@@ -1,7 +1,9 @@
 package persistence;
 
+import model.Barbarian;
 import model.Character;
 import model.CharacterLog;
+import model.Classes;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,7 +15,7 @@ import java.util.stream.Stream;
 
 // Represents a reader that reads CharacterLog from JSON data stored in file
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -45,16 +47,21 @@ public class JsonReader {
     private void addCharacterToCharacterLog(CharacterLog cl, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         boolean isMale = jsonObject.getBoolean("isMale");
+        Classes classes = Classes.valueOf(jsonObject.getString("classes"));
         int experience = jsonObject.getInt("experience");
         int level = jsonObject.getInt("level");
         int health = jsonObject.getInt("health");
         int attackPower = jsonObject.getInt("attackPower");
         int defensePower = jsonObject.getInt("defensePower");
-        Character character = new Character(health, attackPower, defensePower);
+        Character character = new Barbarian();
         character.setName(name);
         character.setIsMale(isMale);
+        character.setClasses(classes);
         character.setExperience(experience);
         character.setLevel(level);
+        character.setHealth(health);
+        character.setAttackPower(attackPower);
+        character.setDefensePower(defensePower);
         cl.addCharacter(character);
     }
 

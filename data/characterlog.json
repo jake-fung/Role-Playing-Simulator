@@ -1,31 +1,10 @@
-{
-  "characters": [
-    {
-      "defensePower": 10,
-      "isMale": true,
-      "attackPower": 25,
-      "level": 1,
-      "name": "Jake",
-      "health": 120,
-      "experience": 0
-    },
-    {
-      "defensePower": 15,
-      "isMale": false,
-      "attackPower": 20,
-      "level": 1,
-      "name": "Abelle",
-      "health": 100,
-      "experience": 0
-    },
-    {
-      "defensePower": 5,
-      "isMale": true,
-      "attackPower": 30,
-      "level": 1,
-      "name": "Tyler",
-      "health": 80,
-      "experience": 100
-    }
-  ]
-}
+{"characters": [{
+    "defensePower": 2510,
+    "isMale": true,
+    "attackPower": 2515,
+    "level": 529,
+    "classes": "Knight",
+    "name": "Jake",
+    "health": 10080,
+    "experience": 20
+}]}

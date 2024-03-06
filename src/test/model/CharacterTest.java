@@ -5,19 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterTest {
-    Character john = new Character(10, 10, 10);
-
-    @Test
-    void testConstructor() {
-        Character alex = new Character(10, 20, 30);
-        assertEquals(10, alex.getHealth());
-        assertEquals(20, alex.getAttackPower());
-        assertEquals(30, alex.getDefensePower());
-    }
+    Character john = new Barbarian();
 
     @Test
     void testGainExperience() {
-        Character bob = new Character(20, 30, 40);
+        Character bob = new Barbarian();
         assertEquals(0, bob.getExperience());
         bob.gainExperience(10);
         assertEquals(10, bob.getExperience());
@@ -25,7 +17,7 @@ class CharacterTest {
 
     @Test
     void testLevelUpNotEnoughExperience() {
-        Character charlie = new Character(0, 0, 0);
+        Character charlie = new Ranger();
         assertEquals(0, charlie.getExperience());
         assertFalse(charlie.levelUp());
         assertEquals(1, charlie.getLevel());
@@ -33,26 +25,26 @@ class CharacterTest {
 
     @Test
     void testLevelUpEnoughExperience() {
-        Character david = new Character(0, 0, 0);
+        Character david = new Knight();
         david.setExperience(20);
         assertEquals(20, david.getExperience());
         assertTrue(david.levelUp());
         assertEquals(2, david.getLevel());
-        assertEquals(20, david.getHealth());
-        assertEquals(5, david.getAttackPower());
-        assertEquals(5, david.getDefensePower());
+        assertEquals(120, david.getHealth());
+        assertEquals(25, david.getAttackPower());
+        assertEquals(20, david.getDefensePower());
     }
 
     @Test
     void testLevelUpEnoughExperienceMultipleLevels() {
-        Character eva = new Character(0, 0, 0);
+        Character eva = new Barbarian();
         eva.setExperience(200);
         assertEquals(200, eva.getExperience());
         assertTrue(eva.levelUp());
         assertEquals(10, eva.getLevel());
-        assertEquals(180, eva.getHealth());
-        assertEquals(45, eva.getAttackPower());
-        assertEquals(45, eva.getDefensePower());
+        assertEquals(300, eva.getHealth());
+        assertEquals(70, eva.getAttackPower());
+        assertEquals(55, eva.getDefensePower());
     }
 
     @Test
@@ -67,6 +59,14 @@ class CharacterTest {
         john.setIsMale(false);
         boolean isMale = john.getIsMale();
         assertFalse(isMale);
+    }
+
+    @Test
+    void testSetAndGetClasses() {
+        assertEquals(Classes.Barbarian, john.getClasses());
+        john.setClasses(Classes.Knight);
+        Classes classes = john.getClasses();
+        assertEquals(Classes.Knight, classes);
     }
 
     @Test
@@ -87,7 +87,7 @@ class CharacterTest {
 
     @Test
     void testSetAndGetHealth() {
-        assertEquals(10, john.getHealth());
+        assertEquals(120, john.getHealth());
         john.setHealth(100);
         int health = john.getHealth();
         assertEquals(100, health);
@@ -95,7 +95,7 @@ class CharacterTest {
 
     @Test
     void testSetAndGetAttackPower() {
-        assertEquals(10, john.getAttackPower());
+        assertEquals(25, john.getAttackPower());
         john.setAttackPower(20);
         int attack = john.getAttackPower();
         assertEquals(20, attack);

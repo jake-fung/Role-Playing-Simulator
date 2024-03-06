@@ -8,7 +8,7 @@ public class RangerTest {
 
     @Test
     void testConstructor() {
-        Character aman = new Ranger();
+        Ranger aman = new Ranger();
         assertEquals(80, aman.getHealth());
         assertEquals(30, aman.getAttackPower());
         assertEquals(5, aman.getDefensePower());

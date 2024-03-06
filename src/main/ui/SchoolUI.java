@@ -31,6 +31,7 @@ public class SchoolUI {
     private void displayCharacterStats(Character c) {
         System.out.println("\n\tName: " + c.getName());
         System.out.println("\tSex: " + (c.getIsMale() ? "Male" : "Female"));
+        System.out.println("\tClass: " + c.getClasses());
         System.out.println("\tExp: " + c.getExperience());
         System.out.println("\tLevel: " + c.getLevel());
         System.out.println("\tHealth: " + c.getHealth());
@@ -64,7 +65,7 @@ public class SchoolUI {
             levelUp(c);
             return true;
         } else if (response.equals("3")) {
-            // gainSpecialAbility(c);
+            gainSpecialAbility(c);
             return true;
         } else if (response.equals("4")) {
             return false;
@@ -74,6 +75,10 @@ public class SchoolUI {
             return true;
         }
     }
+
+    /********************************************
+     * This is where we run the procedure after selecting 1 in the school menu *
+     ********************************************/
 
     // EFFECTS: instantiate the 'Trainer' class and run the training session for the user.
     private void trainingCenter(Character c) {
@@ -124,19 +129,28 @@ public class SchoolUI {
         scanner.nextLine();
     }
 
+    /********************************************
+     * This is where we run the procedure after selecting 2 in the school menu *
+     ********************************************/
+
+    // EFFECTS: perform calls to procedures in order to level up the selected characters.
     private void levelUp(Character c) {
-        displayLevelUpMessage();
+        displayLevelUpMessage(c);
         completeLevelUp(c);
+        System.out.println("Press enter to continue.");
+        scanner.nextLine();
     }
 
-    private void displayLevelUpMessage() {
-        System.out.println("For every 20 experience points, you are able to level up!");
-        System.out.println("You are able to earn new abilities once you reach a certain level.");
+    // EFFECTS: display level up information to the user.
+    private void displayLevelUpMessage(Character c) {
+        System.out.println("\nFor every 20 experience points, you are able to level up!");
+        System.out.println("Your current experience point is " + c.getExperience() + " points.");
         System.out.println("Are you ready? Press enter to level up!");
         scanner.nextLine();
         scanner.nextLine();
     }
 
+    // EFFECTS: display success if the character has successfully level up, fail otherwise.
     private void completeLevelUp(Character c) {
         boolean complete = c.levelUp();
         if (complete) {
@@ -144,25 +158,46 @@ public class SchoolUI {
         } else {
             System.out.println("Your character should have at least 20 experience points!");
         }
+    }
+
+    /********************************************
+     * This is where we run the procedure after selecting 3 in the school menu *
+     ********************************************/
+
+    // EFFECTS: perform calls to procedures in order to gain special ability for the selected characters.
+    private void gainSpecialAbility(Character c) {
+        displayGainSpecialAbilityMessage(c);
+        completeGainSpecialAbility(c);
         System.out.println("Press enter to continue.");
         scanner.nextLine();
     }
 
-//    private void gainSpecialAbility(Character c) {
-//        System.out.println("What ability do you want " + c.getName() + " gain?");
-//        String ability = scanner.next();
-//        switch (ability.toLowerCase()) {
-//            case "accelerated healing":
-//                System.out.println("\n" + c.getName() + " has gained the special ability: Accelerated Healing!");
-//                break;
-//            case "resistance":
-//                System.out.println("\n" + c.getName() + " has gained the special ability: Resistance!");
-//                break;
-//            case "swiftness":
-//                System.out.println("\n" + c.getName() + " has gained the special ability: Swiftness!");
-//                break;
-//            default:
-//                System.out.println("\nInvalid special ability.");
-//        }
-//    }
+    // EFFECTS: display gain special ability information to the user.
+    private void displayGainSpecialAbilityMessage(Character c) {
+        System.out.println("\nFor every 10 levels, you are able to gain special abilities!");
+        System.out.println("Your player is at level " + c.getLevel() + ".");
+        System.out.println("Are you ready? Press enter to gain special ability!");
+        scanner.nextLine();
+        scanner.nextLine();
+    }
+
+    // EFFECTS: display success if the character has successfully gain special ability, fail otherwise.
+    private void completeGainSpecialAbility(Character c) {
+        if (c.getLevel() >= 30) {
+            c.attainLevel30Abilities();
+            System.out.println("Congratulations! You unlocked all the abilities!");
+        } else if (c.getLevel() >= 20) {
+            c.attainLevel20Abilities();
+            System.out.println("You need " + (30 - c.getLevel()) + " additional levels in order to unlock the "
+                    + "next ability!");
+        } else if (c.getLevel() >= 10) {
+            c.attainLevel10Abilities();
+            System.out.println("You need " + (20 - c.getLevel()) + " additional levels in order to unlock the "
+                    + "next ability!");
+        } else {
+            System.out.println("Currently you cannot attain any special abilities.");
+            System.out.println("You still need " + (10 - c.getLevel()) + " level(s) in order to unlock the next "
+                    + "ability!");
+        }
+    }
 }
