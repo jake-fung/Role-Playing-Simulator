@@ -11,19 +11,4 @@ public class Knight extends Character {
         this.defensePower = 15;
         this.classes = Classes.Knight;
     }
-
-    // EFFECTS: Method to attain special abilities at level 10
-    public void attainLevel10Abilities() {
-        System.out.println("You have attained Shield Bash!");
-    }
-
-    // EFFECTS: Method to attain special abilities at level 20
-    public void attainLevel20Abilities() {
-        System.out.println("You have attained Shield Bash and Guardian's Aura!");
-    }
-
-    // EFFECTS: Method to attain special abilities at level 30
-    public void attainLevel30Abilities() {
-        System.out.println("You have attained Shield Bash, Guardian's Aura and Sword of Justice!");
-    }
 }

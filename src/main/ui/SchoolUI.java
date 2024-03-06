@@ -1,6 +1,7 @@
 package ui;
 
 import model.Character;
+import model.Classes;
 import model.Trainer;
 
 import java.util.Scanner;
@@ -58,21 +59,22 @@ public class SchoolUI {
     private boolean selectSchoolMenu(Character c) {
         System.out.println("Enter a number: ");
         String response = scanner.next();
-        if (response.equals("1")) {
-            trainingCenter(c);
-            return true;
-        } else if (response.equals("2")) {
-            levelUp(c);
-            return true;
-        } else if (response.equals("3")) {
-            gainSpecialAbility(c);
-            return true;
-        } else if (response.equals("4")) {
-            return false;
-        } else {
-            System.out.println("Invalid input!");
-            selectSchoolMenu(c);
-            return true;
+        switch (response) {
+            case "1":
+                trainingCenter(c);
+                return true;
+            case "2":
+                levelUp(c);
+                return true;
+            case "3":
+                gainSpecialAbility(c);
+                return true;
+            case "4":
+                return false;
+            default:
+                System.out.println("Invalid input!");
+                selectSchoolMenu(c);
+                return true;
         }
     }
 
@@ -184,20 +186,53 @@ public class SchoolUI {
     // EFFECTS: display success if the character has successfully gain special ability, fail otherwise.
     private void completeGainSpecialAbility(Character c) {
         if (c.getLevel() >= 30) {
-            c.attainLevel30Abilities();
+            attainLevel30Abilities(c);
             System.out.println("Congratulations! You unlocked all the abilities!");
         } else if (c.getLevel() >= 20) {
-            c.attainLevel20Abilities();
+            attainLevel20Abilities(c);
             System.out.println("You need " + (30 - c.getLevel()) + " additional levels in order to unlock the "
                     + "next ability!");
         } else if (c.getLevel() >= 10) {
-            c.attainLevel10Abilities();
+            attainLevel10Abilities(c);
             System.out.println("You need " + (20 - c.getLevel()) + " additional levels in order to unlock the "
                     + "next ability!");
         } else {
             System.out.println("Currently you cannot attain any special abilities.");
             System.out.println("You still need " + (10 - c.getLevel()) + " level(s) in order to unlock the next "
                     + "ability!");
+        }
+    }
+
+    // EFFECTS: Method to attain special abilities at level 30
+    private void attainLevel30Abilities(Character c) {
+        if (c.getClasses() == Classes.Barbarian) {
+            System.out.println("You have attained Frenzy, Rampage and Earth Shaker!");
+        } else if (c.getClasses() == Classes.Knight) {
+            System.out.println("You have attained Shield Bash, Guardian's Aura and Sword of Justice!");
+        } else {
+            System.out.println("You have attained Precision Shot, Explosive Arrow and Camouflage Mastery!");
+        }
+    }
+
+    // EFFECTS: Method to attain special abilities at level 20
+    private void attainLevel20Abilities(Character c) {
+        if (c.getClasses() == Classes.Barbarian) {
+            System.out.println("You have attained Frenzy and Rampage!");
+        } else if (c.getClasses() == Classes.Knight) {
+            System.out.println("You have attained Shield Bash and Guardian's Aura!");
+        } else {
+            System.out.println("You have attained Precision Shot and Explosive Arrow!");
+        }
+    }
+
+    // EFFECTS: Method to attain special abilities at level 10
+    private void attainLevel10Abilities(Character c) {
+        if (c.getClasses() == Classes.Barbarian) {
+            System.out.println("You have attained Frenzy!");
+        } else if (c.getClasses() == Classes.Knight) {
+            System.out.println("You have attained Shield Bash!");
+        } else {
+            System.out.println("You have attained Precision Shot!");
         }
     }
 }

@@ -11,19 +11,4 @@ public class Barbarian extends Character {
         this.defensePower = 10;
         this.classes = Classes.Barbarian;
     }
-
-    // EFFECTS: Method to attain special abilities at level 10
-    public void attainLevel10Abilities() {
-        System.out.println("You have attained Frenzy!");
-    }
-
-    // EFFECTS: Method to attain special abilities at level 20
-    public void attainLevel20Abilities() {
-        System.out.println("You have attained Frenzy and Rampage!");
-    }
-
-    // EFFECTS: Method to attain special abilities at level 30
-    public void attainLevel30Abilities() {
-        System.out.println("You have attained Frenzy, Rampage and Earth Shaker!");
-    }
 }

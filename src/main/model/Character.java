@@ -47,12 +47,6 @@ public abstract class Character implements Writable {
         }
     }
 
-    public abstract void attainLevel10Abilities();
-
-    public abstract void attainLevel20Abilities();
-
-    public abstract void attainLevel30Abilities();
-
     public String getName() {
         return name;
     }

@@ -11,10 +11,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainerTest {
-
     private Trainer trainer;
     private List<String> wordList;
-    private Trainer FileReader;
 
     @BeforeEach
     void setUp() {
@@ -61,14 +59,12 @@ public class TrainerTest {
             String content = "word1\nword2\nword3";
             File tempFile = createTempFileWithContent(content);
 
-            List<String> wordList = FileReader.readWords(tempFile.getAbsolutePath());
+            List<String> wordList = Trainer.readWords(tempFile.getAbsolutePath());
 
             assertEquals(3, wordList.size());
             assertEquals("word1", wordList.get(0));
             assertEquals("word2", wordList.get(1));
             assertEquals("word3", wordList.get(2));
-
-            tempFile.delete(); // Clean up temporary file
         } catch (IOException e) {
             fail("Exception thrown: " + e.getMessage());
         }
@@ -76,7 +72,7 @@ public class TrainerTest {
 
     @Test
     void testReadWordsFileDoesNotExist() {
-        List<String> wordList = FileReader.readWords("nonexistent_file.txt");
+        List<String> wordList = Trainer.readWords("nonexistent_file.txt");
 
         assertTrue(wordList.isEmpty());
     }
@@ -86,10 +82,8 @@ public class TrainerTest {
         try {
             // Create a directory instead of a file, which can't be read
             File tempDir = File.createTempFile("tempDir", "");
-            tempDir.delete();
-            tempDir.mkdir();
 
-            List<String> wordList = FileReader.readWords(tempDir.getAbsolutePath());
+            List<String> wordList = Trainer.readWords(tempDir.getAbsolutePath());
 
             assertTrue(wordList.isEmpty());
         } catch (IOException e) {

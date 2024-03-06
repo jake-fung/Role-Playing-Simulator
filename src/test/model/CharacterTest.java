@@ -108,5 +108,4 @@ class CharacterTest {
         int defense = john.getDefensePower();
         assertEquals(30, defense);
     }
-
 }
