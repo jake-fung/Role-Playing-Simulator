@@ -1,10 +1,32 @@
-{"characters": [{
-    "defensePower": 2510,
-    "isMale": true,
-    "attackPower": 2515,
-    "level": 529,
-    "classes": "Knight",
-    "name": "Jake",
-    "health": 10080,
-    "experience": 20
-}]}
+{"characters": [
+    {
+        "defensePower": 15,
+        "isMale": true,
+        "attackPower": 20,
+        "level": 1,
+        "classes": "Knight",
+        "name": "1",
+        "health": 100,
+        "experience": 0
+    },
+    {
+        "defensePower": 10,
+        "isMale": true,
+        "attackPower": 25,
+        "level": 1,
+        "classes": "Barbarian",
+        "name": "2",
+        "health": 120,
+        "experience": 0
+    },
+    {
+        "defensePower": 5,
+        "isMale": true,
+        "attackPower": 30,
+        "level": 1,
+        "classes": "Ranger",
+        "name": "3",
+        "health": 80,
+        "experience": 0
+    }
+]}

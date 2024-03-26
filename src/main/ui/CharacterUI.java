@@ -177,7 +177,7 @@ public class CharacterUI {
         int response = scanner.nextInt();
         if (response >= 1 && response <= 3) {
             rpClass = Classes.values()[response - 1];
-            System.out.println("You choose " + rpClass);
+            System.out.println("You choose " + rpClass + ".");
         } else {
             System.out.println("There is no such class! Choose again.");
             chooseClass();

@@ -4,7 +4,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a character.
-public abstract class Character implements Writable {
+public class Character implements Writable {
     protected String name;
     protected boolean isMale;
     protected Classes classes;
@@ -42,7 +42,7 @@ public abstract class Character implements Writable {
                 this.health = this.health + 20;
                 this.attackPower = this.attackPower + 5;
                 this.defensePower = this.defensePower + 5;
-            } while (experience > 20);
+            } while (experience >= 20);
             return true;
         }
     }
