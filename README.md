@@ -42,3 +42,18 @@ development.
 - As a player, I want to be able to save my character list I just created into a file.
 
 - As a player, I want to be given an option to load my character list from a file.
+
+
+# Instructions for Grader
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking SELECT
+CHARACTER button after clicking New Builder, this can select individual characters and look at their statistics.
+
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking REMOVE
+CHARACTER button after clicking New Builder, this can remove a character from the Characterlog.
+
+- You can locate my visual component by looking around the background, buttons, and photo in some of the windows.
+
+- You can save the state of my application by clicking Save Builder button.
+
+- You can reload the state of my application by Load Builder button.
