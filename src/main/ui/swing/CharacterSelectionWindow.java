@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
+// Represents a window for selecting a character in a character list
 public class CharacterSelectionWindow extends JFrame {
     private final CharacterBuilder characterBuilder;
     private JButton backButton;
@@ -20,11 +21,14 @@ public class CharacterSelectionWindow extends JFrame {
     private JPanel selectionPanel;
     private JLabel titleLabel;
 
+    // MODIFIES: this
+    // EFFECTS: Initializes a new instance of the CharacterSelectionWindow class
     public CharacterSelectionWindow(CharacterBuilder characterBuilder) {
         this.characterBuilder = characterBuilder;
         init();
     }
 
+    // EFFECTS: Initializes and configures the components of the CharacterSelectionWindow UI.
     private void init() {
         initComponents();
         setWindowProperties();
@@ -32,7 +36,6 @@ public class CharacterSelectionWindow extends JFrame {
         configureCharacterMenu();
         configureButtons();
         addComponentToSelectionPanel();
-        configureCharacterSelectionPanel();
         addComponentToCharacterSelectionPanel();
         addComponentsToFrame();
         centreOnScreen();
@@ -40,6 +43,8 @@ public class CharacterSelectionWindow extends JFrame {
         pack();
     }
 
+    // MODIFITES: this
+    // EFFECTS: Instantiates the various components of the CharacterSelectionWindow UI and initializes their properties.
     private void initComponents() {
         characterSelectionPanel = new JPanel();
         titleLabel = new JLabel();
@@ -50,6 +55,9 @@ public class CharacterSelectionWindow extends JFrame {
         background = new JLabel();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Configures properties of the JFrame window including its default close operation, minimum size,
+    //          resizability, and visibility.
     private void setWindowProperties() {
         setMinimumSize(new Dimension(800, 617));
         setResizable(false);
@@ -58,6 +66,9 @@ public class CharacterSelectionWindow extends JFrame {
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sets the text, background color, font properties, alignment, and opacity of the 'titleLabel' component
+    //          to create a visually distinct title.
     private void configureTitleLabel() {
         titleLabel.setBackground(new Color(0, 204, 204));
         titleLabel.setFont(new Font("Hoefler Text", Font.BOLD, 48));
@@ -66,6 +77,10 @@ public class CharacterSelectionWindow extends JFrame {
         titleLabel.setOpaque(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  Fetches a list of characters from the characterBuilder, creates an array of character names, constructs
+    //           a JList using that array, sets visual properties of the JList, and associates the JList with the
+    //           characterScrollPane.
     private void configureCharacterMenu() {
         ArrayList<Character> characterArrayList = characterBuilder.getCharacters();
         String[] charactersArray = new String[characterArrayList.size()];
@@ -78,6 +93,9 @@ public class CharacterSelectionWindow extends JFrame {
         characterScrollPane.setViewportView(characterList);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sets up the buttons for character selection and return to previous menu, adds action listeners, and
+    //          configures their visual states.
     private void configureButtons() {
         selectButton.setFont(new Font("Hoefler Text", Font.BOLD, 24));
         selectButton.setText("SELECT");
@@ -91,6 +109,8 @@ public class CharacterSelectionWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds ActionListener to the select button.
     private void addActionListenerForSelectButton() {
         selectButton.addActionListener(e -> {
             if (characterList.getSelectedIndex() != -1) {
@@ -103,6 +123,9 @@ public class CharacterSelectionWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the selectionPanel, using a layout manager to control their positioning
+    //          and sizing.
     private void addComponentToSelectionPanel() {
         GroupLayout selectionPanelLayout = new GroupLayout(selectionPanel);
         selectionPanel.setLayout(selectionPanelLayout);
@@ -124,48 +147,33 @@ public class CharacterSelectionWindow extends JFrame {
 
     }
 
-    private void configureCharacterSelectionPanel() {
-        characterSelectionPanel.setBackground(new Color(255, 255, 255));
-    }
-
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the characterSelectionPanel, using a layout manager to control their
+    //          positioning and sizing.
     private void addComponentToCharacterSelectionPanel() {
+        characterSelectionPanel.setBackground(new Color(255, 255, 255));
         GroupLayout characterSelectionPanelLayout = new GroupLayout(characterSelectionPanel);
         characterSelectionPanel.setLayout(characterSelectionPanelLayout);
-        setCharacterSelectionPanelHorizontalLayout(characterSelectionPanelLayout);
-        setCharacterSelectionPanelVerticalLayout(characterSelectionPanelLayout);
-    }
-
-    private void setCharacterSelectionPanelHorizontalLayout(GroupLayout characterSelectionPanelLayout) {
         characterSelectionPanelLayout.setHorizontalGroup(
                 characterSelectionPanelLayout.createParallelGroup()
                         .addComponent(titleLabel, -2, 720, -2)
-                        .addGroup(characterSelectionPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(characterScrollPane)
-                                .addContainerGap())
-                        .addGroup(characterSelectionPanelLayout.createParallelGroup()
-                                .addGroup(characterSelectionPanelLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(selectionPanel)
-                                        .addContainerGap()))
+                        .addComponent(characterScrollPane, -2, 720, -2)
+                        .addComponent(selectionPanel, -2, 720, -2)
         );
-    }
-
-    private void setCharacterSelectionPanelVerticalLayout(GroupLayout characterSelectionPanelLayout) {
         characterSelectionPanelLayout.setVerticalGroup(
                 characterSelectionPanelLayout.createParallelGroup()
                         .addGroup(characterSelectionPanelLayout.createSequentialGroup()
                                 .addComponent(titleLabel, -2, 88, -2)
                                 .addGap(10)
                                 .addComponent(characterScrollPane, -2, 331, -2)
-                                .addContainerGap(65, -2))
-                        .addGroup(characterSelectionPanelLayout.createParallelGroup()
-                                .addGroup(characterSelectionPanelLayout.createSequentialGroup()
-                                        .addGap(432)
-                                        .addComponent(selectionPanel)))
+                                .addGap(5)
+                                .addComponent(selectionPanel)
+                        )
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds the components to the JFrame, adjusting their layout properties (e.g., bounds) for proper display.
     private void addComponentsToFrame() {
         add(characterSelectionPanel);
         characterSelectionPanel.setBounds(40, 60, 720, 490);
@@ -176,6 +184,9 @@ public class CharacterSelectionWindow extends JFrame {
         background.setBounds(0, 0, 800, 618);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Calculates the appropriate coordinates to position the JFrame in the center of the
+    //          user's screen and sets the frame's location accordingly.
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);

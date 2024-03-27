@@ -41,10 +41,10 @@ class CharacterTest {
         eva.setExperience(200);
         assertEquals(200, eva.getExperience());
         assertTrue(eva.levelUp());
-        assertEquals(10, eva.getLevel());
-        assertEquals(300, eva.getHealth());
-        assertEquals(70, eva.getAttackPower());
-        assertEquals(55, eva.getDefensePower());
+        assertEquals(11, eva.getLevel());
+        assertEquals(320, eva.getHealth());
+        assertEquals(75, eva.getAttackPower());
+        assertEquals(60, eva.getDefensePower());
     }
 
     @Test

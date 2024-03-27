@@ -8,6 +8,7 @@ import java.awt.*;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
+// Represents a window for creating a new character.
 public class NewCharacterWindow extends JFrame {
     private final CharacterBuilder characterBuilder;
     private JButton backButton;
@@ -24,22 +25,24 @@ public class NewCharacterWindow extends JFrame {
     private JPanel namePanel;
     private JPanel newCharacterPanel;
     private JButton rangerButton;
-    private JLabel textLabel;
+    private JLabel titleLabel;
     private JLabel nameLabel;
     private Boolean isMale;
     private Classes classes;
     private String characterName;
 
+    // MODIFIES: this
+    // EFFECTS: Initializes a new instance of the NewCharacterWindow class
     public NewCharacterWindow(CharacterBuilder characterBuilder) {
         this.characterBuilder = characterBuilder;
         init();
     }
 
+    // EFFECTS: Initializes and configures the components of the NewCharacterWindow UI.
     private void init() {
         initComponents();
         setWindowProperties();
-        configureNewCharacterPanel();
-        configureTitle();
+        configureTitleLabel();
         configureComponentsInNamePanel();
         configureButtons();
         addComponentToNamePanel();
@@ -53,9 +56,11 @@ public class NewCharacterWindow extends JFrame {
         pack();
     }
 
+    // MODIFITES: this
+    // EFFECTS: Instantiates the various components of the NewCharacterWindow UI and initializes their properties.
     private void initComponents() {
         newCharacterPanel = new JPanel();
-        textLabel = new JLabel();
+        titleLabel = new JLabel();
         namePanel = new JPanel();
         nameLabel = new JLabel();
         nameTextField = new JTextField();
@@ -74,6 +79,9 @@ public class NewCharacterWindow extends JFrame {
         isMale = null;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Configures properties of the JFrame window including its default close operation, minimum size,
+    //          resizability, and visibility.
     private void setWindowProperties() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(800, 617));
@@ -82,18 +90,20 @@ public class NewCharacterWindow extends JFrame {
         setVisible(true);
     }
 
-    private void configureNewCharacterPanel() {
-        newCharacterPanel.setBackground(new Color(255, 255, 255));
+    // MODIFIES: this
+    // EFFECTS: Sets the text, background color, font properties, alignment, and opacity of the 'titleLabel' component
+    //          to create a visually distinct title.
+    private void configureTitleLabel() {
+        titleLabel.setBackground(new Color(0, 204, 204));
+        titleLabel.setFont(new Font("Hoefler Text", Font.PLAIN, 48));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setText("CREATE YOUR CHARACTER");
+        titleLabel.setOpaque(true);
     }
 
-    private void configureTitle() {
-        textLabel.setBackground(new Color(0, 204, 204));
-        textLabel.setFont(new Font("Hoefler Text", Font.PLAIN, 48));
-        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        textLabel.setText("CREATE YOUR CHARACTER");
-        textLabel.setOpaque(true);
-    }
-
+    // MODIFIES: this
+    // EFFECTS: Sets the font and potentially other visual properties of the nameLabel and nameTextField components,
+    // for the purpose of styling the name input section.
     private void configureComponentsInNamePanel() {
         nameLabel.setFont(new Font("Hoefler Text", Font.BOLD, 24));
         nameLabel.setText("Your name:");
@@ -101,6 +111,9 @@ public class NewCharacterWindow extends JFrame {
         nameTextField.setFont(new Font("Hoefler Text", Font.PLAIN, 24));
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sets up the buttons for gender and class selection, adds action listeners, and configures their visual
+    //          states.
     private void configureButtons() {
         maleButton.setIcon(new ImageIcon("data/pictures/malebutton.png"));
         femaleButton.setIcon(new ImageIcon("data/pictures/femalebutton.png"));
@@ -125,6 +138,10 @@ public class NewCharacterWindow extends JFrame {
         addActionListenerForCreateButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds ActionListeners to the gender buttons. When triggered, the listeners update the visual
+    //          representation of the selected gender (e.g., darkening the selected button) and set the value of the
+    //          isMale instance variable accordingly.
     private void addActionListenerForGenderButton() {
         maleButton.addActionListener(e -> {
             if (maleButton.isEnabled()) {
@@ -142,6 +159,10 @@ public class NewCharacterWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds ActionListeners to the barbarian button. When triggered, the listeners update the visual
+    //          representation of the selected class (e.g., darkening the selected button) and set the value of the
+    //          class instance variable accordingly.
     private void addActionListenerForBarbarianButton() {
         barbarianButton.addActionListener(e -> {
             if (barbarianButton.isEnabled()) {
@@ -153,6 +174,10 @@ public class NewCharacterWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds ActionListeners to the knight button. When triggered, the listeners update the visual
+    //          representation of the selected class (e.g., darkening the selected button) and set the value of the
+    //          class instance variable accordingly.
     private void addActionListenerForKnightButton() {
         knightButton.addActionListener(e -> {
             if (knightButton.isEnabled()) {
@@ -164,6 +189,10 @@ public class NewCharacterWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds ActionListeners to the ranger button. When triggered, the listeners update the visual
+    //          representation of the selected class (e.g., darkening the selected button) and set the value of the
+    //          class instance variable accordingly.
     private void addActionListenerForRangerButton() {
         rangerButton.addActionListener(e -> {
             if (rangerButton.isEnabled()) {
@@ -175,6 +204,9 @@ public class NewCharacterWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Attempts to create a new character with the provided details. If successful, displays a message, and
+    //          transitions to the CharacterLogWindow. Otherwise, displays an error message.
     private void addActionListenerForCreateButton() {
         createButton.addActionListener(e -> {
             characterName = nameTextField.getText();
@@ -189,6 +221,9 @@ public class NewCharacterWindow extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the namePanel, using a layout manager to control their positioning and
+    //          sizing.
     private void addComponentToNamePanel() {
         GroupLayout namePanelLayout = new GroupLayout(namePanel);
         namePanel.setLayout(namePanelLayout);
@@ -196,6 +231,9 @@ public class NewCharacterWindow extends JFrame {
         setNamePanelVerticalLayout(namePanelLayout);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the horizontal arrangement of the components within the namePanel using the provided
+    //          GroupLayout. This involves setting horizontal gaps and creating sequential or parallel groups.
     private void setNamePanelHorizontalLayout(GroupLayout namePanelLayout) {
         namePanelLayout.setHorizontalGroup(
                 namePanelLayout.createParallelGroup()
@@ -208,6 +246,9 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the vertical arrangement of the components within the namePanel using the provided GroupLayout.
+    //          This involves setting vertical gaps and creating sequential or parallel groups.
     private void setNamePanelVerticalLayout(GroupLayout namePanelLayout) {
         namePanelLayout.setVerticalGroup(
                 namePanelLayout.createParallelGroup()
@@ -219,6 +260,9 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the genderPanel, using a layout manager to control their positioning and
+    //          sizing.
     private void addComponentToGenderPanel() {
         GroupLayout genderPanelLayout = new GroupLayout(genderPanel);
         genderPanel.setLayout(genderPanelLayout);
@@ -242,6 +286,9 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the namePanel, using a layout manager to control their positioning and
+    //          sizing.
     private void addComponentToClassPanel() {
         GroupLayout classPanelLayout = new GroupLayout(classPanel);
         classPanel.setLayout(classPanelLayout);
@@ -249,6 +296,9 @@ public class NewCharacterWindow extends JFrame {
         setClassPanelVerticalLayout(classPanelLayout);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the horizontal arrangement of the components within the classPanel using the provided
+    //          GroupLayout. This involves setting horizontal gaps and creating sequential or parallel groups.
     private void setClassPanelHorizontalLayout(GroupLayout classPanelLayout) {
         classPanelLayout.setHorizontalGroup(
                 classPanelLayout.createParallelGroup()
@@ -263,6 +313,9 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the vertical arrangement of the components within the classPanel using the provided GroupLayout.
+    //          This involves setting vertical gaps and creating sequential or parallel groups.
     private void setClassPanelVerticalLayout(GroupLayout classPanelLayout) {
         classPanelLayout.setVerticalGroup(
                 classPanelLayout.createParallelGroup()
@@ -275,6 +328,10 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the confirmPanel, using a layout manager to control their positioning and
+    //          sizing.
     private void addComponentToConfirmPanel() {
         GroupLayout confirmPanelLayout = new GroupLayout(confirmPanel);
         confirmPanel.setLayout(confirmPanelLayout);
@@ -292,32 +349,42 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Arranges the components within the newCharacterPanel, using a layout manager to control their
+    // positioning and sizing.
     private void addComponentToNewCharacterPanel() {
+        newCharacterPanel.setBackground(new Color(255, 255, 255));
         GroupLayout newCharacterPanelLayout = new GroupLayout(newCharacterPanel);
         newCharacterPanel.setLayout(newCharacterPanelLayout);
         setNewCharacterPanelHorizontalLayout(newCharacterPanelLayout);
         setNewCharacterPanelVerticalLayout(newCharacterPanelLayout);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the horizontal arrangement of the components within the newCharacterPanel using the provided
+    // GroupLayout. This involves setting horizontal gaps and creating sequential or parallel groups.
     private void setNewCharacterPanelHorizontalLayout(GroupLayout newCharacterPanelLayout) {
         newCharacterPanelLayout.setHorizontalGroup(
                 newCharacterPanelLayout.createParallelGroup()
                         .addComponent(namePanel, -2, 711, -2)
-                            .addGroup(newCharacterPanelLayout.createSequentialGroup()
-                                    .addGroup(newCharacterPanelLayout.createParallelGroup()
-                                    .addComponent(genderPanel, -2, 711, -2)
-                                    .addComponent(classPanel, -2, 711, -2)
-                                    .addComponent(confirmPanel, -2, 711, -2)
-                            ))
-                        .addComponent(textLabel, -2, 721, -2)
+                        .addGroup(newCharacterPanelLayout.createSequentialGroup()
+                                .addGroup(newCharacterPanelLayout.createParallelGroup()
+                                        .addComponent(genderPanel, -2, 711, -2)
+                                        .addComponent(classPanel, -2, 711, -2)
+                                        .addComponent(confirmPanel, -2, 711, -2)
+                                ))
+                        .addComponent(titleLabel, -2, 721, -2)
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Defines the vertical arrangement of the components within the newCharacterPanel using the provided
+    // roupLayout. This involves setting vertical gaps and creating sequential or parallel groups.
     private void setNewCharacterPanelVerticalLayout(GroupLayout newCharacterPanelLayout) {
         newCharacterPanelLayout.setVerticalGroup(
                 newCharacterPanelLayout.createParallelGroup()
                         .addGroup(newCharacterPanelLayout.createSequentialGroup()
-                                .addComponent(textLabel, -2, 88, -2)
+                                .addComponent(titleLabel, -2, 88, -2)
                                 .addGap(5)
                                 .addComponent(namePanel, -2, 77, -2)
                                 .addGap(5)
@@ -330,6 +397,8 @@ public class NewCharacterWindow extends JFrame {
         );
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds the components to the JFrame, adjusting their layout properties (e.g., bounds) for proper display.
     private void addComponentsToFrame() {
         add(newCharacterPanel);
         newCharacterPanel.setBounds(40, 60, 720, 490);
@@ -338,6 +407,9 @@ public class NewCharacterWindow extends JFrame {
         background.setBounds(0, 0, 800, 617);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Calculates the appropriate coordinates to position the JFrame in the center of the
+    //          user's screen and sets the frame's location accordingly.
     private void centreOnScreen() {
         Dimension scrn = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((scrn.width - getWidth()) / 2, (scrn.height - getHeight()) / 2);

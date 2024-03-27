@@ -9,34 +9,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Represents a character builder running on swing.
 public class CharacterBuilder {
     private static final String JSON_STORE = "./data/characterlog.json";
-    private CharacterLog cl;
+    private CharacterLog characterLog;
 
-
+    // EFFECTS: initiates all simulators and runs the character builder application.
     public CharacterBuilder() {
-        cl = new CharacterLog();
+        characterLog = new CharacterLog();
     }
 
-    public int getNumCharacters() {
-        return cl.getNumCharacters();
-    }
-
-    public void saveCharacters() throws FileNotFoundException {
-        JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-        jsonWriter.open();
-        jsonWriter.write(cl);
-        jsonWriter.close();
-    }
-
-    public void loadCharacters() throws IOException, RuntimeException {
-        JsonReader jsonReader = new JsonReader(JSON_STORE);
-        cl = jsonReader.read();
-        if (cl.getNumCharacters() == 0) {
-            throw new RuntimeException();
-        }
-    }
-
+    // MODIFIES: this
+    // EFFECTS: create a new character based on name, isMale and classes.
     public void createCharacter(String name, boolean isMale, Classes classes) {
         Character character;
         if (classes == Classes.Barbarian) {
@@ -48,22 +32,48 @@ public class CharacterBuilder {
         }
         character.setName(name);
         character.setIsMale(isMale);
-        cl.addCharacter(character);
+        characterLog.addCharacter(character);
     }
 
+    // EFFECTS: return the number of characters in Characterlog.
+    public int getNumCharacters() {
+        return characterLog.getNumCharacters();
+    }
+
+    // EFFECTS: return the character corresponding to the position of Characterlog.
+    public Character getCharacter(int index) {
+        return characterLog.getCharacter(index);
+    }
+
+    // EFFECTS: return an array list of all the characters in Characterlog.
     public ArrayList<Character> getCharacters() {
         ArrayList<Character> characters = new ArrayList<>();
-        for (int i = 0; i < cl.getNumCharacters(); i++) {
-            characters.add(cl.getCharacter(i));
+        for (int i = 0; i < characterLog.getNumCharacters(); i++) {
+            characters.add(characterLog.getCharacter(i));
         }
         return characters;
     }
 
-    public Character getCharacter(int index) {
-        return cl.getCharacter(index);
+    // MODIFIES: this
+    // EFFECTS: remove the character corresponding to the position in the Characterlog.
+    public void removeResident(int index) {
+        characterLog.removeCharacter(index);
     }
 
-    public void removeResident(int index) {
-        cl.removeCharacter(index);
+    // EFFECTS: write contents into a JSON file.
+    public void saveCharacters() throws FileNotFoundException {
+        JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+        jsonWriter.open();
+        jsonWriter.write(characterLog);
+        jsonWriter.close();
+    }
+
+    // EFFECTS: read contents from a JSON file.
+    public void loadCharacters() throws IOException, RuntimeException {
+        JsonReader jsonReader = new JsonReader(JSON_STORE);
+        characterLog = jsonReader.read();
+        if (characterLog.getNumCharacters() == 0) {
+            throw new RuntimeException();
+        }
     }
 }
