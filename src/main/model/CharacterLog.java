@@ -21,13 +21,18 @@ public class CharacterLog implements Writable {
     // EFFECTS: Adds the specified Character object to the end of the characterLog list.
     public void addCharacter(Character c) {
         characterLog.add(c);
+        EventLog.getInstance().logEvent(new Event("Character " + c.getName() + " the "
+                + c.getClasses() + " has been added!"));
     }
 
     // REQUIRES: i >= 0.
     // MODIFIES: this
     // EFFECTS: Removes the Character object at the specified index i from the characterLog.
     public void removeCharacter(int i) {
+        Character temp = characterLog.get(i);
         characterLog.remove(i);
+        EventLog.getInstance().logEvent(new Event("Character " + temp.getName() + " the "
+                + temp.getClasses() + " has been removed."));
     }
 
     // REQUIRES: characterLog is not null

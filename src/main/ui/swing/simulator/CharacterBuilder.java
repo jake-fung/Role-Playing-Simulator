@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class CharacterBuilder {
     private static final String JSON_STORE = "./data/characterlog.json";
     private CharacterLog characterLog;
+    private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+    private final JsonReader jsonReader = new JsonReader(JSON_STORE);
 
     // EFFECTS: initiates all simulators and runs the character builder application.
     public CharacterBuilder() {
@@ -62,7 +64,6 @@ public class CharacterBuilder {
 
     // EFFECTS: write contents into a JSON file.
     public void saveCharacters() throws FileNotFoundException {
-        JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
         jsonWriter.open();
         jsonWriter.write(characterLog);
         jsonWriter.close();
@@ -70,7 +71,6 @@ public class CharacterBuilder {
 
     // EFFECTS: read contents from a JSON file.
     public void loadCharacters() throws IOException, RuntimeException {
-        JsonReader jsonReader = new JsonReader(JSON_STORE);
         characterLog = jsonReader.read();
         if (characterLog.getNumCharacters() == 0) {
             throw new RuntimeException();

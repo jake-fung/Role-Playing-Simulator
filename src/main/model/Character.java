@@ -104,6 +104,8 @@ public class Character implements Writable {
     }
 
     public int getDefensePower() {
+        EventLog.getInstance().logEvent(new Event("Character " + name
+                + " the " + classes + " has been selected and statistics has been retrieved."));
         return defensePower;
     }
 
