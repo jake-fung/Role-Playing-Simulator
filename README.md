@@ -84,9 +84,9 @@ Character Henry the Knight has been removed.
 ## Phase 4: Task 3
 
 - During an in-depth refactoring initiative targeting the Swing package, I've consistently discovered significant amounts 
-of redundant code within classes. To enhance maintainability and readability, I believe there's a substantial opportunity 
-to refactor these duplicated code sections and introduce well-defined constants, which would abstract away literal values 
-and make the code's intent clearer.
+of redundant code within classes, such as the setting background and buttons operations. To enhance maintainability and 
+readability, I believe there's a substantial opportunity to refactor these duplicated code sections and introduce well-defined 
+constants, which would abstract away literal values and make the code's intent clearer.
 
 - Redundant coupling within the NewCharacterWindow and Classes classes suggests a strong need for refactoring; this could 
 involve applying design patterns or dependency injection techniques to better decouple their functionalities.

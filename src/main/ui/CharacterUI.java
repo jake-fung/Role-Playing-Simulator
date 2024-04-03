@@ -14,12 +14,12 @@ import java.util.Scanner;
 public class CharacterUI {
     private static final String JSON_STORE = "./data/characterlog.json";
     private final Scanner scanner;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
     private CharacterLog characterLog;
     private String name;
     private boolean isMale;
     private Classes rpClass;
-    private final JsonWriter jsonWriter;
-    private final JsonReader jsonReader;
 
     // EFFECTS: Constructs a new `CharacterUI` object and initializes the `characterLog` and `scanner` fields.
     public CharacterUI() {

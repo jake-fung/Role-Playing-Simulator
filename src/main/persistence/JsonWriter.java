@@ -10,8 +10,8 @@ import java.io.PrintWriter;
 // Represents a writer that writes JSON representation of CharacterLog to file
 public class JsonWriter {
     private static final int TAB = 4;
-    private PrintWriter writer;
     private final String destination;
+    private PrintWriter writer;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {

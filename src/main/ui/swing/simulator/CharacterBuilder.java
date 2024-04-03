@@ -12,9 +12,9 @@ import java.util.ArrayList;
 // Represents a character builder running on swing.
 public class CharacterBuilder {
     private static final String JSON_STORE = "./data/characterlog.json";
-    private CharacterLog characterLog;
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private CharacterLog characterLog;
 
     // EFFECTS: initiates all simulators and runs the character builder application.
     public CharacterBuilder() {
