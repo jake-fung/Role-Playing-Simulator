@@ -1,5 +1,7 @@
 # Role-Playing Simulator - Term Project for UBC CPSC 210
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/eqVeIVxqCJo/0.jpg)](https://www.youtube.com/watch?v=eqVeIVxqCJo)
+
 ## Proposal
 
 ### What will this application do?
